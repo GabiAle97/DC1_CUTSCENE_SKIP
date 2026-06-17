@@ -8,8 +8,23 @@
       <Address>dino.exe+2D3F64</Address>
     </CheatEntry>
     <CheatEntry>
+      <ID>62</ID>
+      <Description>"Flag de Cutscene"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>dino.exe+2DBADC</Address>
+    </CheatEntry>
+    <CheatEntry>
       <ID>8</ID>
       <Description>"No description"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>Array of byte</VariableType>
+      <ByteLength>9</ByteLength>
+      <Address>0x006DD9DD</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>74</ID>
+      <Description>"No description"</Description>
+      <ShowAsHex>1</ShowAsHex>
       <ShowAsSigned>0</ShowAsSigned>
       <VariableType>Array of byte</VariableType>
       <ByteLength>5</ByteLength>
@@ -397,12 +412,6 @@
       <Address>dino.exe+2DE9BC</Address>
     </CheatEntry>
     <CheatEntry>
-      <ID>62</ID>
-      <Description>"Flag de Cutscene"</Description>
-      <VariableType>4 Bytes</VariableType>
-      <Address>dino.exe+2DBADC</Address>
-    </CheatEntry>
-    <CheatEntry>
       <ID>64</ID>
       <Description>"No description"</Description>
       <ShowAsSigned>0</ShowAsSigned>
@@ -474,6 +483,7 @@ system_addr = 0x006D3E68
 cutscene_real_addr = 0x006DBADC
 door_anim_addr = 0x0067B8A8
 room_addr = 0x006DD8F0   -- Current Room (2 bytes)
+key_item_addr = 0x006DD9DD   -- Key Item ID (2 bytes)
 
 coord_x_addr = 0x006D58AC
 coord_y_addr = 0x006D58A8
@@ -503,19 +513,62 @@ saved_y = 0
 pending_skip = false
 pending_restore = false
 capture_frame = 0
+skip_flag = 0
+counter = 0
+skip_allow = false
+room_106 = false
 
 function skip_cutscene()
   local flag = readBytes(flag_addr, 1, false)
   local sys = readBytes(system_addr, 1, false)
   local real = readBytes(cutscene_real_addr, 1, false)
   local room_id = readSmallInteger(room_addr)
+  if real == 3  and flag == 4 then
+    real = 1
+  end
   -- Flanco ascendente de cutscene real, PERO excluyendo la sala del puzzle
   if real == 1 and not pending_skip and not pending_restore then
-    if not PUZZLE_ROOMS[room_id] then
+    print(string.format("real %d, no poending skip %s, no pending restore %s", real, tostring(pending_skip), tostring(pending_restore)))
+    if room_id == 0x0106 and not room_106 then
+      room_106 = true
+      skip_allow = true
+    end
+    if not PUZZLE_ROOMS[room_id] or skip_allow then
+      print(string.format("Entering room %04X, skip allowed: %s", room_id, tostring(skip_allow)))
       saved_x = readSmallInteger(coord_x_addr)
       saved_y = readSmallInteger(coord_y_addr)
       pending_skip = true
       capture_frame = 0
+      skip_allow = false
+    else
+      if room_id == 0x0202 or room_id == 0x030E or room_id == 0x0405 and skip_flag == 0 then
+        print(string.format("Entering room %04X, skip flag: %d, skip_allowed: %s, PUZZLE_ROOMS: %s", room_id, skip_flag, tostring(skip_allow), tostring(PUZZLE_ROOMS[room_id])))
+        saved_x = readSmallInteger(coord_x_addr)
+        saved_y = readSmallInteger(coord_y_addr)
+        pending_skip = true
+        capture_frame = 0
+        skip_allow = false
+        if room_id == 0x0202 then
+          writeBytes(key_item_addr, 0x00, 0x00, 0x60, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04)
+        end
+      end
+      skip_flag = 1
+    end
+  end
+
+  if real == 0 and skip_flag == 1 then
+    skip_flag = 0
+    if room_id == 0x0202 then
+      skip_allow = true
+      print(string.format("counter: %d, skip_allow: %s", counter, tostring(skip_allow)))
+    end
+    if room_id == 0x030B then
+      skip_allow = true
+      print(string.format("counter: %d, skip_allow: %s", counter, tostring(skip_allow)))
+    end
+    if room_id == 0x010F then
+      skip_allow = true
+      print(string.format("counter: %d, skip_allow: %s", counter, tostring(skip_allow)))
     end
   end
 
