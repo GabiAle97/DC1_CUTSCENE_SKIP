@@ -483,35 +483,31 @@ entity_flag_addr = 0x006D58B8
 
 PUZZLE_ROOMS = {
   [0x010F] = true,   -- Puzzle de fusibles
-  [0x0103] = true,
-  [0x0202] = true    -- ... más
-}   -- Sala del puzzle de fusibles (271 decimal)
+  [0x0103] = true,   -- 0375
+  [0x0202] = true,   -- Dino Merquero
+  [0x030B] = true,   -- Puzzle de fusibles 2 (Ascensor)
+  [0x0106] = true,   -- Decision
+  [0x030E] = true,   -- Enfermeria
+  [0x0405] = true,    -- Puzzle Tubos
+  [0x0113] = true,    -- Antes Elevador
+  [0x0309] = true,    -- Despues Elevador
+  [0x0304] = true,    -- Decision 2
+  [0x030C] = true,    -- Gail y Kirk
+  [0x0106] = true,    -- Elevador 2
+  [0x0201] = true    -- Softlock Dino Merquero
+}
 
 saved_x = 0
 saved_y = 0
 pending_skip = false
 pending_restore = false
 capture_frame = 0
-counter = 0
 
 function skip_cutscene()
   local flag = readBytes(flag_addr, 1, false)
   local sys = readBytes(system_addr, 1, false)
   local real = readBytes(cutscene_real_addr, 1, false)
   local room_id = readSmallInteger(room_addr)
-
-  if room_id == 0x0202 and real == 1 and counter == 0 then
-     counter = 1
-  end
-  if room_id == 0x0202 and real == 0 and counter == 1 then
-     counter = 2
-  end
-  if room_id == 0x0202 and real == 1 and counter == 2 then
-     counter = 3
-  end
-  if room_id == 0x0202 and real == 0 and counter == 3 then
-     counter = 4
-  end
   -- Flanco ascendente de cutscene real, PERO excluyendo la sala del puzzle
   if real == 1 and not pending_skip and not pending_restore then
     if not PUZZLE_ROOMS[room_id] then
@@ -519,14 +515,6 @@ function skip_cutscene()
       saved_y = readSmallInteger(coord_y_addr)
       pending_skip = true
       capture_frame = 0
-    else
-      if room_id == 0x0202 and counter == 4 then
-         counter = 0
-         saved_x = readSmallInteger(coord_x_addr)
-         saved_y = readSmallInteger(coord_y_addr)
-         pending_skip = true
-         capture_frame = 0
-      end
     end
   end
 
