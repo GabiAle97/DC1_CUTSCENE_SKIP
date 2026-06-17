@@ -494,7 +494,8 @@ PUZZLE_ROOMS = {
   [0x0304] = true,    -- Decision 2
   [0x030C] = true,    -- Gail y Kirk
   [0x0106] = true,    -- Elevador 2
-  [0x0201] = true    -- Softlock Dino Merquero
+  [0x0201] = true,    -- Softlock Dino Merquero
+  [0x060F] = true
 }
 
 saved_x = 0
