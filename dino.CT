@@ -31,448 +31,13 @@
       <Address>0x006D3E68</Address>
     </CheatEntry>
     <CheatEntry>
-      <ID>9</ID>
-      <Description>"No description"</Description>
-      <ShowAsSigned>0</ShowAsSigned>
-      <VariableType>2 Bytes</VariableType>
-      <Address>0x006D58A9</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>63</ID>
-      <Description>"No description"</Description>
-      <ShowAsSigned>0</ShowAsSigned>
-      <VariableType>2 Bytes</VariableType>
-      <Address>dino.exe+2D58BD</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>10</ID>
+      <ID>75</ID>
       <Description>"No description"</Description>
       <ShowAsHex>1</ShowAsHex>
       <ShowAsSigned>0</ShowAsSigned>
       <VariableType>Array of byte</VariableType>
       <ByteLength>10</ByteLength>
-      <Address>0x006D58C4</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>11</ID>
-      <Description>"No description"</Description>
-      <VariableType>2 Bytes</VariableType>
-      <Address>dino.exe+2846AA</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>12</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>4 Bytes</VariableType>
-      <Address>dino.exe+26F410</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>13</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>4 Bytes</VariableType>
-      <Address>dino.exe+270B80</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>14</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>Float</VariableType>
-      <Address>dino.exe+270B80</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>15</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>Double</VariableType>
-      <Address>dino.exe+270B80</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>16</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>Double</VariableType>
-      <Address>dino.exe+275B6C</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>17</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>4 Bytes</VariableType>
-      <Address>dino.exe+275B70</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>18</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>Float</VariableType>
-      <Address>dino.exe+275B70</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>19</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>Double</VariableType>
-      <Address>dino.exe+275B70</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>20</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>Double</VariableType>
-      <Address>dino.exe+275B74</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>21</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>4 Bytes</VariableType>
-      <Address>dino.exe+275B78</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>22</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>Float</VariableType>
-      <Address>dino.exe+275B78</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>23</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>Double</VariableType>
-      <Address>dino.exe+275B78</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>24</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>Double</VariableType>
-      <Address>dino.exe+278E44</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>25</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>4 Bytes</VariableType>
-      <Address>dino.exe+278E48</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>26</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>Float</VariableType>
-      <Address>dino.exe+278E48</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>27</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>Double</VariableType>
-      <Address>dino.exe+278E48</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>28</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>4 Bytes</VariableType>
-      <Address>dino.exe+278E4C</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>29</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>Float</VariableType>
-      <Address>dino.exe+278E4C</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>30</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>Double</VariableType>
-      <Address>dino.exe+278E4C</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>31</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>Double</VariableType>
-      <Address>dino.exe+27B8A4</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>32</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>4 Bytes</VariableType>
-      <Address>dino.exe+27B8A8</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>33</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>Float</VariableType>
-      <Address>dino.exe+27B8A8</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>34</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>Double</VariableType>
-      <Address>dino.exe+27B8B8</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>35</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>4 Bytes</VariableType>
-      <Address>dino.exe+27B8BC</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>36</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>Float</VariableType>
-      <Address>dino.exe+27B8BC</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>37</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>Double</VariableType>
-      <Address>dino.exe+27B8BC</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>38</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>Double</VariableType>
-      <Address>dino.exe+2D3E5C</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>39</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>4 Bytes</VariableType>
-      <Address>dino.exe+2D3E60</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>40</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>Float</VariableType>
-      <Address>dino.exe+2D3E60</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>41</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>Double</VariableType>
-      <Address>dino.exe+2D3E60</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>43</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>4 Bytes</VariableType>
-      <Address>dino.exe+2D3E68</Address>
-      <CheatEntries>
-        <CheatEntry>
-          <ID>42</ID>
-          <Description>"No description"</Description>
-          <ShowAsHex>1</ShowAsHex>
-          <VariableType>Double</VariableType>
-          <Address>dino.exe+2D3E64</Address>
-        </CheatEntry>
-      </CheatEntries>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>44</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>Float</VariableType>
-      <Address>dino.exe+2D3E68</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>45</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>Double</VariableType>
-      <Address>dino.exe+2D3E68</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>46</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>4 Bytes</VariableType>
-      <Address>dino.exe+2D3E6C</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>47</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>Float</VariableType>
-      <Address>dino.exe+2D3E6C</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>48</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>Double</VariableType>
-      <Address>dino.exe+2D3E6C</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>49</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>Double</VariableType>
-      <Address>dino.exe+2D59B0</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>50</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>4 Bytes</VariableType>
-      <Address>dino.exe+2D59B4</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>51</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>Float</VariableType>
-      <Address>dino.exe+2D59B4</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>52</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>Double</VariableType>
-      <Address>dino.exe+2D59B4</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>53</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>Double</VariableType>
-      <Address>dino.exe+2D59F8</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>54</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>4 Bytes</VariableType>
-      <Address>dino.exe+2D59FC</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>55</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>Float</VariableType>
-      <Address>dino.exe+2D59FC</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>56</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>Double</VariableType>
-      <Address>dino.exe+2D59FC</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>57</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>4 Bytes</VariableType>
-      <Address>dino.exe+2DE9AC</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>58</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>Float</VariableType>
-      <Address>dino.exe+2DE9AC</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>59</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>4 Bytes</VariableType>
-      <Address>dino.exe+2DE9BC</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>60</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>Float</VariableType>
-      <Address>dino.exe+2DE9BC</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>61</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <VariableType>Double</VariableType>
-      <Address>dino.exe+2DE9BC</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>64</ID>
-      <Description>"No description"</Description>
-      <ShowAsSigned>0</ShowAsSigned>
-      <VariableType>2 Bytes</VariableType>
-      <Address>006D58A8</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>65</ID>
-      <Description>"No description"</Description>
-      <ShowAsSigned>0</ShowAsSigned>
-      <VariableType>2 Bytes</VariableType>
-      <Address>006D58C0</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>66</ID>
-      <Description>"No description"</Description>
-      <ShowAsSigned>0</ShowAsSigned>
-      <VariableType>2 Bytes</VariableType>
-      <Address>006D5BB9</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>67</ID>
-      <Description>"No description"</Description>
-      <ShowAsSigned>0</ShowAsSigned>
-      <VariableType>2 Bytes</VariableType>
-      <Address>006D5DE9</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>69</ID>
-      <Description>"No description"</Description>
-      <VariableType>2 Bytes</VariableType>
-      <Address>dino.exe+24F45C</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>70</ID>
-      <Description>"No description"</Description>
-      <ShowAsSigned>0</ShowAsSigned>
-      <VariableType>2 Bytes</VariableType>
-      <Address>0x006D58A8</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>71</ID>
-      <Description>"No description"</Description>
-      <ShowAsSigned>0</ShowAsSigned>
-      <VariableType>2 Bytes</VariableType>
-      <Address>0x006D58AA</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>72</ID>
-      <Description>"No description"</Description>
-      <ShowAsSigned>0</ShowAsSigned>
-      <VariableType>2 Bytes</VariableType>
-      <Address>0x006D58AC</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>73</ID>
-      <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <ShowAsSigned>0</ShowAsSigned>
-      <VariableType>4 Bytes</VariableType>
-      <Address>dino.exe+2DD8F0</Address>
+      <Address>$process+2D3F5C</Address>
     </CheatEntry>
   </CheatEntries>
   <UserdefinedSymbols/>
@@ -507,6 +72,9 @@ PUZZLE_ROOMS = {
   [0x0201] = true,    -- Softlock Dino Merquero
   [0x060F] = true,
   [0x0403] = true,
+  [0x0307] = true,
+  [0x0205] = true,
+  [0x0600] = true,
   [0x0409] = true
 }
 
@@ -526,6 +94,7 @@ room_30E = 0
 room_202 = 0
 room_30B = 0
 room_10F = 0
+room_205 = 0
 
 
 
@@ -551,8 +120,10 @@ function skip_cutscene()
     room_202 = 0
     room_30B = 0
     room_10F = 0
+    room_205 = 0
+    room_600 = 0
   end
-  if real == 3  and flag == 4 then
+  if real == 3  and flag == 4 and room_id == 0x0107 then
     real = 1
   end
   if room_id == 0x0304 and flag == 4 and real == 0 and room_304 == 0 then
@@ -564,8 +135,6 @@ function skip_cutscene()
     
     if room_id == 0x010F and room_10F == 1 then
       skip_allow = true
-      print(string.format("Cutscene %d detected in room 0x010F,", room_10F))
-      print(string.format("Skip allow: %s", tostring(skip_allow)))
     end
     if room_id == 0x0106 and room_106 == 0 then
       skip_allow = true
@@ -573,7 +142,7 @@ function skip_cutscene()
     if room_id == 0x0405 and room_405 == 0 then
       skip_allow = true
     end
-    if room_id == 0x030C and room_30C &lt;= 1 then
+    if room_id == 0x030C and (room_30C &lt;= 1 or room_30C == 2) then
       skip_allow = true
     end
     if room_id == 0x030E and room_30E == 0 then
@@ -583,6 +152,12 @@ function skip_cutscene()
       skip_allow = true
     end
     if room_id == 0x030B and room_30B == 1 then
+      skip_allow = true
+    end
+    if room_id == 0x0205 and room_205 == 1 then
+      skip_allow = true
+    end
+    if room_id == 0x0600 and room_600 == 2 then
       skip_allow = true
     end
     if not PUZZLE_ROOMS[room_id] or skip_allow then
@@ -624,13 +199,12 @@ function skip_cutscene()
     if room_id == 0x0405 then
       room_405 = room_405 + 1
     end
-    print(string.format("room_202: skip %d", room_202))
-    print(string.format("room_30B: skip %d", room_30B))
-    print(string.format("room_10F: skip %d", room_10F))
-    print(string.format("room_30C: skip %d", room_30C))
-    print(string.format("room_30E: skip %d", room_30E))
-    print(string.format("room_106: skip %d", room_106))
-    print(string.format("room_405: skip %d", room_405))
+    if room_id == 0x0205 then
+      room_205 = room_205 + 1
+    end
+    if room_id == 0x0600 then
+      room_600 = room_600 + 1
+    end
   end
 
   if pending_skip then
