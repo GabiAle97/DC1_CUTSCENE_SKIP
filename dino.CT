@@ -505,7 +505,9 @@ PUZZLE_ROOMS = {
   [0x030C] = true,    -- Gail y Kirk
   [0x0106] = true,    -- Elevador 2
   [0x0201] = true,    -- Softlock Dino Merquero
-  [0x060F] = true
+  [0x060F] = true,
+  [0x0403] = true,
+  [0x0409] = true
 }
 
 saved_x = 0
@@ -517,6 +519,12 @@ skip_flag = 0
 counter = 0
 skip_allow = false
 room_106 = false
+room_405 = false
+room_30C = false
+room_304 = false
+elusive_kirk = false
+elusive_kirk_done = false
+
 
 function skip_cutscene()
   local flag = readBytes(flag_addr, 1, false)
@@ -526,11 +534,26 @@ function skip_cutscene()
   if real == 3  and flag == 4 then
     real = 1
   end
+  if room_id == 0x0304 and flag == 4 and real == 0 and not room_304 then
+    real = 1
+    skip_allow = true
+    room_304 = true
+    print(string.format("Entering room %04X, flag: %d, real: %d", room_id, flag, real))
+  end
   -- Flanco ascendente de cutscene real, PERO excluyendo la sala del puzzle
   if real == 1 and not pending_skip and not pending_restore then
     print(string.format("real %d, no poending skip %s, no pending restore %s", real, tostring(pending_skip), tostring(pending_restore)))
+    print(string.format("Entering room %04X, skip allowed: %s", room_id, tostring(skip_allow)))
     if room_id == 0x0106 and not room_106 then
       room_106 = true
+      skip_allow = true
+    end
+    if room_id == 0x0405 and not room_405 then
+      room_405 = true
+      skip_allow = true
+    end
+    if room_id == 0x030C and not room_30C then
+      room_30C = true
       skip_allow = true
     end
     if not PUZZLE_ROOMS[room_id] or skip_allow then
@@ -540,8 +563,14 @@ function skip_cutscene()
       pending_skip = true
       capture_frame = 0
       skip_allow = false
+      if elusive_kirk then
+        print("Elusive Kirk skip activated")
+        writeBytes(key_item_addr, 0x00, 0x60, 0x00, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00)
+        elusive_kirk = false
+        elusive_kirk_done = true
+      end
     else
-      if room_id == 0x0202 or room_id == 0x030E or room_id == 0x0405 and skip_flag == 0 then
+      if room_id == 0x0202 or room_id == 0x030E and skip_flag == 0 then
         print(string.format("Entering room %04X, skip flag: %d, skip_allowed: %s, PUZZLE_ROOMS: %s", room_id, skip_flag, tostring(skip_allow), tostring(PUZZLE_ROOMS[room_id])))
         saved_x = readSmallInteger(coord_x_addr)
         saved_y = readSmallInteger(coord_y_addr)
@@ -568,6 +597,13 @@ function skip_cutscene()
     end
     if room_id == 0x010F then
       skip_allow = true
+      print(string.format("counter: %d, skip_allow: %s", counter, tostring(skip_allow)))
+    end
+    if room_id == 0x030C then
+      skip_allow = true
+      if not elusive_kirk_done then
+        elusive_kirk = true
+      end
       print(string.format("counter: %d, skip_allow: %s", counter, tostring(skip_allow)))
     end
   end
