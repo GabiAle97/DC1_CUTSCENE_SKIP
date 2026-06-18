@@ -531,6 +531,22 @@ function skip_cutscene()
   local sys = readBytes(system_addr, 1, false)
   local real = readBytes(cutscene_real_addr, 1, false)
   local room_id = readSmallInteger(room_addr)
+  if room_id == 0x0000 then
+    saved_x = 0
+    saved_y = 0
+    pending_skip = false
+    pending_restore = false
+    capture_frame = 0
+    skip_flag = 0
+    counter = 0
+    skip_allow = false
+    room_106 = false
+    room_405 = false
+    room_30C = false
+    room_304 = false
+    elusive_kirk = false
+    elusive_kirk_done = false
+  end
   if real == 3  and flag == 4 then
     real = 1
   end
