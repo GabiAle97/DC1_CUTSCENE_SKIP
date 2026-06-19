@@ -75,6 +75,8 @@ PUZZLE_ROOMS = {
   [0x0307] = true,
   [0x0205] = true,
   [0x0600] = true,
+  [0x0608] = true,
+  [0x0601] = true,
   [0x0409] = true
 }
 
@@ -95,6 +97,9 @@ room_202 = 0
 room_30B = 0
 room_10F = 0
 room_205 = 0
+room_600 = 0
+room_608 = 0
+room_601 = 0
 
 
 
@@ -122,6 +127,8 @@ function skip_cutscene()
     room_10F = 0
     room_205 = 0
     room_600 = 0
+    room_608 = 0
+    room_601 = 0
   end
   if real == 3  and flag == 4 and room_id == 0x0107 then
     real = 1
@@ -135,11 +142,13 @@ function skip_cutscene()
     
     if room_id == 0x010F and room_10F == 1 then
       skip_allow = true
+      print(string.format("Cutscene %d detected in room 0x010F,", room_10F))
+      print(string.format("Skip allow: %s", tostring(skip_allow)))
     end
     if room_id == 0x0106 and room_106 == 0 then
       skip_allow = true
     end
-    if room_id == 0x0405 and room_405 == 0 then
+    if room_id == 0x0405 and (room_405 == 0 or room_405 == 1) then
       skip_allow = true
     end
     if room_id == 0x030C and (room_30C &lt;= 1 or room_30C == 2) then
@@ -154,10 +163,13 @@ function skip_cutscene()
     if room_id == 0x030B and room_30B == 1 then
       skip_allow = true
     end
-    if room_id == 0x0205 and room_205 == 1 then
+    if room_id == 0x0205 and (room_205 == 1 or room_205 == 2) then
       skip_allow = true
     end
-    if room_id == 0x0600 and room_600 == 2 then
+    if room_id == 0x0600 and (room_600 == 2 or room_600 == 3) then
+      skip_allow = true
+    end
+    if room_id == 0x0608 and room_608 == 1 then
       skip_allow = true
     end
     if not PUZZLE_ROOMS[room_id] or skip_allow then
@@ -205,6 +217,18 @@ function skip_cutscene()
     if room_id == 0x0600 then
       room_600 = room_600 + 1
     end
+    print(string.format("room_106: skip %d", room_106))
+    print(string.format("room_10F: skip %d", room_10F))
+    print(string.format("room_202: skip %d", room_202))
+    print(string.format("room_205: skip %d", room_205))
+    print(string.format("room_30B: skip %d", room_30B))
+    print(string.format("room_304: skip %d", room_304))
+    print(string.format("room_30C: skip %d", room_30C))
+    print(string.format("room_30E: skip %d", room_30E))
+    print(string.format("room_405: skip %d", room_405))
+    print(string.format("room_600: skip %d", room_600))
+    print(string.format("room_608: skip %d", room_608))
+    print(string.format("room_601: skip %d", room_601))
   end
 
   if pending_skip then
