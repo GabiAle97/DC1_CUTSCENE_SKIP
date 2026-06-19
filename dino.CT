@@ -77,6 +77,12 @@ PUZZLE_ROOMS = {
   [0x0600] = true,
   [0x0608] = true,
   [0x0601] = true,
+  [0x0604] = true,
+  [0x0509] = true,
+  [0x050A] = true,
+  [0x050F] = true,
+  [0x0610] = true,
+  [0x0613] = true,
   [0x0409] = true
 }
 
@@ -88,6 +94,7 @@ capture_frame = 0
 skip_flag = 0
 counter = 0
 skip_allow = false
+room_610 = 0
 room_106 = 0
 room_405 = 0
 room_30C = 0
@@ -100,7 +107,7 @@ room_205 = 0
 room_600 = 0
 room_608 = 0
 room_601 = 0
-
+room_50F = 0
 
 
 function skip_cutscene()
@@ -129,6 +136,8 @@ function skip_cutscene()
     room_600 = 0
     room_608 = 0
     room_601 = 0
+    room_50F = 0
+    room_610 = 0
   end
   if real == 3  and flag == 4 and room_id == 0x0107 then
     real = 1
@@ -172,6 +181,12 @@ function skip_cutscene()
     if room_id == 0x0608 and room_608 == 1 then
       skip_allow = true
     end
+    if room_id == 0x050F and room_50F == 0 then
+      skip_allow = true
+    end
+    if room_id == 0x0610 and room_610 == 0 then
+      skip_allow = true
+    end
     if not PUZZLE_ROOMS[room_id] or skip_allow then
       saved_x = readSmallInteger(coord_x_addr)
       saved_y = readSmallInteger(coord_y_addr)
@@ -183,6 +198,12 @@ function skip_cutscene()
       end
       if room_id == 0x0202 and room_202 == 0 then
         writeBytes(key_item_addr, 0x00, 0x00, 0x60, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04)
+      end
+      if room_id == 0x050E then
+        writeBytes(key_item_addr, 0x00, 0x60, 0x15, 0x04, 0x00, 0x00, 0x20, 0x00, 0x00)
+      end
+      if room_id == 0x0610 and room_610 == 0 then
+        writeBytes(key_item_addr, 0x00, 0x20, 0x1D, 0x04, 0x00, 0x10, 0x21, 0x00, 0x00)
       end
     end
     skip_flag = 1
@@ -217,6 +238,12 @@ function skip_cutscene()
     if room_id == 0x0600 then
       room_600 = room_600 + 1
     end
+    if room_id == 0x050F then
+      room_50F = room_50F + 1
+    end
+    if room_id == 0x0610 then
+      room_610 = room_610 + 1
+    end
     print(string.format("room_106: skip %d", room_106))
     print(string.format("room_10F: skip %d", room_10F))
     print(string.format("room_202: skip %d", room_202))
@@ -229,6 +256,8 @@ function skip_cutscene()
     print(string.format("room_600: skip %d", room_600))
     print(string.format("room_608: skip %d", room_608))
     print(string.format("room_601: skip %d", room_601))
+    print(string.format("room_50F: skip %d", room_50F))
+    print(string.format("room_610: skip %d", room_610))
   end
 
   if pending_skip then
