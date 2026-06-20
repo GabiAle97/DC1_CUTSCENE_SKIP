@@ -193,6 +193,9 @@ function skip_cutscene()
     if room_id == 0x0600 and (room_600 == 2 or room_600 == 3) then
       skip_allow = true
     end
+    if room_id == 0x0600 and room_600 == 1 then
+      special_skip_allow = true
+    end
     if room_id == 0x0608 and room_608 == 1 then
       skip_allow = true
     end
@@ -219,10 +222,6 @@ function skip_cutscene()
           saved_x = 63500
           saved_y = 8200
         end
-      end
-      if room_id == 0x0600 and room_600 == 1 then
-        saved_x = 58055
-        saved_y = 8125
       end
       if room_id == 0x0609 and room_609 == 0 then
         saved_x = 65089
@@ -307,6 +306,18 @@ function skip_cutscene()
       writeBytes(system_addr, 0x06, 0x00, 0x00, 0x00, 0x00)
       writeBytes(flag_addr, 0x00)
       pending_skip = false
+      pending_restore = true
+      capture_frame = 0
+    end
+  end
+
+  if special_skip_allow then
+    capture_frame = capture_frame + 1
+    if capture_frame &gt;= 2 then
+      writeBytes(system_addr, 0x06, 0x00, 0x00, 0x00, 0x00)
+      special_skip_allow = false
+      saved_x = 58055
+      saved_y = 8125
       pending_restore = true
       capture_frame = 0
     end
