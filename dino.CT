@@ -190,7 +190,7 @@ function skip_cutscene()
     if room_id == 0x0205 and (room_205 == 1 or room_205 == 2) then
       skip_allow = true
     end
-    if room_id == 0x0600 and (room_600 == 1 or room_600 == 2 or room_600 == 3) then
+    if room_id == 0x0600 and (or room_600 == 2 or room_600 == 3) then
       skip_allow = true
     end
     if room_id == 0x0608 and room_608 == 1 then
