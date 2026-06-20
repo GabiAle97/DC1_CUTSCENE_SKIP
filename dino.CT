@@ -39,8 +39,20 @@
       <ByteLength>10</ByteLength>
       <Address>$process+2D3F5C</Address>
     </CheatEntry>
+    <CheatEntry>
+      <ID>76</ID>
+      <Description>"No description"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>4 Bytes</VariableType>
+      <Address>DINO.exe+2D3E78</Address>
+    </CheatEntry>
   </CheatEntries>
-  <UserdefinedSymbols/>
+  <UserdefinedSymbols>
+    <SymbolEntry>
+      <Name>speedhack_wantedspeed</Name>
+      <Address>AE0000</Address>
+    </SymbolEntry>
+  </UserdefinedSymbols>
   <Comments>Info about this table:
 </Comments>
   <LuaScript>flag_addr = 0x006D3F64
@@ -108,6 +120,7 @@ room_600 = 0
 room_608 = 0
 room_601 = 0
 room_50F = 0
+room_509 = 0
 
 
 function skip_cutscene()
@@ -138,6 +151,7 @@ function skip_cutscene()
     room_601 = 0
     room_50F = 0
     room_610 = 0
+    room_509 = 0
   end
   if real == 3  and flag == 4 and room_id == 0x0107 then
     real = 1
@@ -151,13 +165,14 @@ function skip_cutscene()
     
     if room_id == 0x010F and room_10F == 1 then
       skip_allow = true
-      print(string.format("Cutscene %d detected in room 0x010F,", room_10F))
-      print(string.format("Skip allow: %s", tostring(skip_allow)))
+    end
+    if room_id == 0x0304 and room_304 == 0 then
+      skip_allow = true
     end
     if room_id == 0x0106 and room_106 == 0 then
       skip_allow = true
     end
-    if room_id == 0x0405 and (room_405 == 0 or room_405 == 1) then
+    if room_id == 0x0405 and (room_405 == 0 or room_405 == 2) then
       skip_allow = true
     end
     if room_id == 0x030C and (room_30C &lt;= 1 or room_30C == 2) then
@@ -175,13 +190,16 @@ function skip_cutscene()
     if room_id == 0x0205 and (room_205 == 1 or room_205 == 2) then
       skip_allow = true
     end
-    if room_id == 0x0600 and (room_600 == 2 or room_600 == 3) then
+    if room_id == 0x0600 and (room_600 == 1 or room_600 == 2 or room_600 == 3) then
       skip_allow = true
     end
     if room_id == 0x0608 and room_608 == 1 then
       skip_allow = true
     end
     if room_id == 0x050F and room_50F == 0 then
+      skip_allow = true
+    end
+    if room_id == 0x0609 and (room_609 == 0 or room_609 == 1) then
       skip_allow = true
     end
     if room_id == 0x0610 and room_610 == 0 then
@@ -193,8 +211,22 @@ function skip_cutscene()
       pending_skip = true
       capture_frame = 0
       skip_allow = false
-      if room_id == 0x030C and room_30C == 2 then
-        writeBytes(key_item_addr, 0x00, 0x60, 0x00, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00)
+      if room_id == 0x030C then
+        if room_30C == 2 then
+          writeBytes(key_item_addr, 0x00, 0x60, 0x00, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00)
+        end
+        if room_30C == 0 then
+          saved_x = 63500
+          saved_y = 8200
+        end
+      end
+      if room_id == 0x0600 and room_600 == 1 then
+        saved_x = 58055
+        saved_y = 8125
+      end
+      if room_id == 0x0609 and room_609 == 0 then
+        saved_x = 65089
+        saved_y = 65238
       end
       if room_id == 0x0202 and room_202 == 0 then
         writeBytes(key_item_addr, 0x00, 0x00, 0x60, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04)
@@ -243,6 +275,15 @@ function skip_cutscene()
     end
     if room_id == 0x0610 then
       room_610 = room_610 + 1
+    end
+    if room_id == 0x0609 then
+      room_609 = room_609 + 1
+    end
+    if room_id == 0x0304 then
+      room_304 = room_304 + 1
+    end
+    if room_id == 0x060F and room_405 == 1 then
+      room_405 = room_405 + 1
     end
     print(string.format("room_106: skip %d", room_106))
     print(string.format("room_10F: skip %d", room_10F))
