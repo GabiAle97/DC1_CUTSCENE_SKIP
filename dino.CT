@@ -316,8 +316,10 @@ function skip_cutscene()
     if capture_frame &gt;= 2 then
       writeBytes(system_addr, 0x06, 0x00, 0x00, 0x00, 0x00)
       special_skip_allow = false
-      saved_x = 58055
-      saved_y = 8125
+      if room_id == 0x0600 then
+        saved_x = 58055
+        saved_y = 8125
+      end
       pending_restore = true
       capture_frame = 0
     end
