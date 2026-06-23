@@ -467,7 +467,7 @@ function skip_cutscene()
         end
       end
       if room_id == 0x060F then
-        if room_60F == 0 then
+        if room_60F == 0 or room_60F == 1 then
           teleport_after_cutscene = true
         end
       end
@@ -484,9 +484,14 @@ function skip_cutscene()
   end
 
   if teleport_after_cutscene then
-    if room_id == 0x060F and room_60F == 0 then
-      writeBytes(room_addr, 0x0C, 0x03)
-      room_60F = room_60F + 1
+    if room_id == 0x060F then
+      if room_60F == 0 then
+        writeBytes(room_addr, 0x0F, 0x06)
+        room_60F = room_60F + 1
+      else
+        writeBytes(room_addr, 0x0C, 0x03)
+        room_60F = room_60F + 1
+      end
     end
     if room_id == 0x0409 and room_409 == 0 then
       writeBytes(room_addr, 0x0A, 0x04)
