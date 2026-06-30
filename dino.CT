@@ -79,45 +79,44 @@
     <CheatEntry>
       <ID>81</ID>
       <Description>"No description"</Description>
-      <VariableType>4 Bytes</VariableType>
-      <Address>DINO.exe+2D1FFC</Address>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>Byte</VariableType>
+      <Address>DINO.exe+2DD109</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>82</ID>
       <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <ShowAsSigned>0</ShowAsSigned>
       <VariableType>Byte</VariableType>
-      <Address>006D2157</Address>
+      <Address>DINO.exe+2DD94F</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>83</ID>
       <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
-      <ShowAsSigned>0</ShowAsSigned>
       <VariableType>Byte</VariableType>
-      <Address>006D1E04</Address>
+      <Address>DINO.exe+2D1B9B</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>84</ID>
       <Description>"No description"</Description>
       <ShowAsHex>1</ShowAsHex>
+      <ShowAsSigned>0</ShowAsSigned>
       <VariableType>Byte</VariableType>
-      <Address>DINO.exe+2DCE54</Address>
+      <Address>DINO.exe+277D30</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>85</ID>
       <Description>"No description"</Description>
       <ShowAsHex>1</ShowAsHex>
+      <ShowAsSigned>0</ShowAsSigned>
       <VariableType>Byte</VariableType>
-      <Address>DINO.exe+2DCE62</Address>
+      <Address>DINO.exe+277D31</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>86</ID>
       <Description>"No description"</Description>
-      <ShowAsHex>1</ShowAsHex>
+      <ShowAsSigned>0</ShowAsSigned>
       <VariableType>Byte</VariableType>
-      <Address>006DCE62</Address>
+      <Address>DINO.exe+277D41</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>87</ID>
@@ -125,15 +124,15 @@
       <ShowAsHex>1</ShowAsHex>
       <ShowAsSigned>0</ShowAsSigned>
       <VariableType>Byte</VariableType>
-      <Address>006DCE5E</Address>
+      <Address>00677C14 </Address>
     </CheatEntry>
     <CheatEntry>
       <ID>88</ID>
-      <Description>"Flag Cerrar grua"</Description>
+      <Description>"No description"</Description>
       <ShowAsHex>1</ShowAsHex>
       <ShowAsSigned>0</ShowAsSigned>
-      <VariableType>Byte</VariableType>
-      <Address>006DCE5F</Address>
+      <VariableType>4 Bytes</VariableType>
+      <Address>006B46B8</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>89</ID>
@@ -141,62 +140,77 @@
       <ShowAsHex>1</ShowAsHex>
       <ShowAsSigned>0</ShowAsSigned>
       <VariableType>Byte</VariableType>
-      <Address>006DCE63</Address>
+      <Address>006B4665 </Address>
     </CheatEntry>
     <CheatEntry>
       <ID>90</ID>
       <Description>"No description"</Description>
       <ShowAsHex>1</ShowAsHex>
       <ShowAsSigned>0</ShowAsSigned>
-      <VariableType>Byte</VariableType>
-      <Address>006DCE55</Address>
+      <VariableType>Array of byte</VariableType>
+      <ByteLength>4</ByteLength>
+      <Address>DINO.exe+2D3E7C</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>91</ID>
       <Description>"No description"</Description>
       <ShowAsHex>1</ShowAsHex>
       <ShowAsSigned>0</ShowAsSigned>
-      <VariableType>Byte</VariableType>
-      <Address>006DC100</Address>
+      <VariableType>Array of byte</VariableType>
+      <ByteLength>4</ByteLength>
+      <Address>DINO.exe+2D3E80</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>92</ID>
       <Description>"No description"</Description>
       <ShowAsHex>1</ShowAsHex>
+      <ShowAsSigned>0</ShowAsSigned>
       <VariableType>Byte</VariableType>
-      <Address>DINO.exe+2DC115</Address>
+      <Address>DINO.exe+2D3EAF</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>93</ID>
       <Description>"No description"</Description>
       <ShowAsHex>1</ShowAsHex>
+      <ShowAsSigned>0</ShowAsSigned>
       <VariableType>Byte</VariableType>
-      <Address>DINO.exe+2DC19D</Address>
+      <Address>DINO.exe+2D3EB0</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>94</ID>
       <Description>"No description"</Description>
       <ShowAsHex>1</ShowAsHex>
-      <VariableType>Byte</VariableType>
-      <Address>DINO.exe+2DC225</Address>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>Array of byte</VariableType>
+      <ByteLength>224</ByteLength>
+      <Address>DINO.exe+2D3EF4</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>95</ID>
       <Description>"No description"</Description>
       <ShowAsHex>1</ShowAsHex>
-      <VariableType>Byte</VariableType>
-      <Address>DINO.exe+2DC2AD</Address>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>2 Bytes</VariableType>
+      <Address>DINO.exe+27B868+0A</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>96</ID>
       <Description>"No description"</Description>
       <ShowAsHex>1</ShowAsHex>
       <ShowAsSigned>0</ShowAsSigned>
-      <VariableType>Byte</VariableType>
-      <Address>DINO.exe+2DC334</Address>
+      <VariableType>2 Bytes</VariableType>
+      <Address>02F35572</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>97</ID>
+      <Description>"No description"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>2 Bytes</VariableType>
+      <Address>$process+2D3E79</Address>
     </CheatEntry>
   </CheatEntries>
-  <UserdefinedSymbols/>
+  <UserdefinedSymbols>
+  </UserdefinedSymbols>
   <Comments>Info about this table:
 </Comments>
   <LuaScript>flag_addr = 0x006D3F64
@@ -215,6 +229,8 @@ entity_flag_addr = 0x006D58B8
 
 float_304_addr = 0x00677D28
 flag_crane = 0x006DCE5E
+flag_action_done = 0x006D3E7C
+flag_action_done_bis = 0x006D3E80
 
 PUZZLE_ROOMS = {
   [0x010F] = true,   -- Puzzle de fusibles
@@ -275,6 +291,8 @@ room_60F = 0
 room_509 = 0
 room_409 = 0
 room_40C = 0
+room_406 = 0
+room_309 = 0
 teleport = false
 teleport_after_cutscene = false
 special_skip_allow = false
@@ -296,6 +314,8 @@ function skip_cutscene()
   local real = readBytes(cutscene_real_addr, 1, false)
   local room_id = readSmallInteger(room_addr)
   local crane_init = readBytes(flag_crane, 1, false)
+  local action_done = readSmallInteger(flag_action_done)
+  local action_done_bis = readBytes(flag_action_done_bis, 1, false)
   
   if room_id == 0x0000 then
     saved_x = 0
@@ -326,9 +346,14 @@ function skip_cutscene()
     room_509 = 0
     room_409 = 0
     room_40C = 0
+    room_406 = 0
+    room_309 = 0
     teleport = false
     teleport_after_cutscene = false
     special_skip_allow = false
+  end
+  if (room_id == 0x050A or room_id == 0x0509) and (action_done == 0x0012 or action_done == 0x1014 or action_done == 0x1016) then
+    writeBytes(flag_action_done, 0x10, 0x00)
   end
   if real == 3  and flag == 4 and room_id == 0x0107 then
     real = 1
@@ -340,15 +365,18 @@ function skip_cutscene()
     real = 1
     room_304 = room_304 + 1
   end
-  if room_id == 0x0615 or room_id == 0x030C then
-    if crane_init == 1 then
+  if room_id == 0x0309 and room_309 == 0 then
+    teleport_after_cutscene = true
+  end
+  if room_id == 0x0615 or room_id == 0x030C or room_id == 0x050A or room_id == 0x0509 or room_id == 0x0408 then
+    if crane_init == 1 or (((room_id == 0x050A and real == 1) or (room_id == 0x050A and flag == 2) or (room_id == 0x0509 and real == 1) or (room_id == 0x0509 and flag == 2)) and action_done == 0x0010) or (room_id == 0x0408 and action_done_bis == 4) then
       if not timer_enabled then
         timer_enabled = true
         timer_start_value = readInteger(timer_addr)
         real_time_start = getTickCount()
         speedhack_setSpeed(speedhack_multiplier)
       end
-    elseif crane_init == 0 then
+    elseif crane_init == 0 or (room_id == 0x050A and real == 0 and flag == 0) or (room_id == 0x0509 and real == 0 and flag == 0)  or (room_id == 0x0408 and action_done_bis == 0) then
       if timer_enabled then
         -- Calcular el tiempo real transcurrido
         local elapsed_real_ms = getTickCount() - real_time_start
@@ -373,7 +401,7 @@ function skip_cutscene()
     if room_id == 0x0304 then
       skip_allow = true
     end
-    if room_id == 0x0106 and room_106 == 0 then
+    if room_id == 0x0106 and (room_106 == 0 or room_106 == 1) then
       skip_allow = true
     end
     if room_id == 0x0405 and (room_405 == 0 or room_405 == 2) then
@@ -427,6 +455,12 @@ function skip_cutscene()
     end
     if room_id == 0x0409 then
       teleport_after_cutscene = true
+    end
+    if room_id == 0x030E and room_30E == 0 then
+      teleport_after_cutscene = true
+    end
+    if room_id == 0x0406 and room_406 == 1 then
+      writeBytes(key_item_addr, 0x00, 0x40, 0x00, 0x84, 0x00, 0x00, 0x00, 0x10, 0x18)
     end
     if room_id == 0x0509 and room_509 == 0 then
       skip_allow = true
@@ -501,6 +535,13 @@ function skip_cutscene()
       writeBytes(room_addr, 0x00, 0x06)
       room_40C = room_40C + 1
     end
+    if room_id == 0x030E and room_30E == 0 then
+      writeBytes(room_addr, 0x09, 0x03)
+      room_309 = room_309 + 1
+    end
+    if room_id == 0x0309 and room_309 == 0 then
+      writeBytes(room_addr, 0x0E, 0x03)
+    end
     special_skip_allow = true
     teleport_after_cutscene = false
   end
@@ -566,6 +607,9 @@ function skip_cutscene()
     if room_id == 0x0304 then
       room_304 = room_304 + 1
     end
+    if room_id == 0x0406 then
+      room_406 = room_406 + 1
+    end
     print(string.format("room_106: skip %d", room_106))
     print(string.format("room_10F: skip %d", room_10F))
     print(string.format("room_202: skip %d", room_202))
@@ -627,6 +671,11 @@ function skip_cutscene()
       end
       if room_id == 0x030C then
         room_30C = room_30C + 2
+      end
+      if room_id == 0x030E then
+        saved_x = 64867
+        saved_y = 56048
+        saved_o = 32
       end
       if room_id == 0x040A then
         saved_x = 11981
