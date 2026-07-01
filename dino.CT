@@ -31,6 +31,15 @@
       <Address>0x006DD8F0</Address>
     </CheatEntry>
     <CheatEntry>
+      <ID>98</ID>
+      <Description>"Current Camera"</Description>
+      <ShowAsHex>1</ShowAsHex>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>Array of byte</VariableType>
+      <ByteLength>4</ByteLength>
+      <Address>$process+2D3F5C</Address>
+    </CheatEntry>
+    <CheatEntry>
       <ID>74</ID>
       <Description>"No description"</Description>
       <ShowAsHex>1</ShowAsHex>
@@ -208,9 +217,28 @@
       <VariableType>2 Bytes</VariableType>
       <Address>$process+2D3E79</Address>
     </CheatEntry>
+    <CheatEntry>
+      <ID>99</ID>
+      <Description>"No description"</Description>
+      <VariableType>Byte</VariableType>
+      <Address>DINO.exe+2DC092</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>100</ID>
+      <Description>"No description"</Description>
+      <VariableType>Byte</VariableType>
+      <Address>DINO.exe+2DC093</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>101</ID>
+      <Description>"No description"</Description>
+      <ShowAsHex>1</ShowAsHex>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>Byte</VariableType>
+      <Address>0x006DC09B</Address>
+    </CheatEntry>
   </CheatEntries>
-  <UserdefinedSymbols>
-  </UserdefinedSymbols>
+  <UserdefinedSymbols/>
   <Comments>Info about this table:
 </Comments>
   <LuaScript>flag_addr = 0x006D3F64
@@ -231,6 +259,8 @@ float_304_addr = 0x00677D28
 flag_crane = 0x006DCE5E
 flag_action_done = 0x006D3E7C
 flag_action_done_bis = 0x006D3E80
+flag_reja = 0x006DC09B
+flag_colision_reja = 0x006DD930
 
 PUZZLE_ROOMS = {
   [0x010F] = true,   -- Puzzle de fusibles
@@ -294,6 +324,7 @@ room_40C = 0
 room_406 = 0
 room_309 = 0
 teleport = false
+second_teleport = false
 teleport_after_cutscene = false
 special_skip_allow = false
 counter_flag_zero = 0
@@ -349,11 +380,16 @@ function skip_cutscene()
     room_406 = 0
     room_309 = 0
     teleport = false
+    second_teleport = false
     teleport_after_cutscene = false
     special_skip_allow = false
   end
   if (room_id == 0x050A or room_id == 0x0509) and (action_done == 0x0012 or action_done == 0x1014 or action_done == 0x1016) then
     writeBytes(flag_action_done, 0x10, 0x00)
+  end
+  if room_id == 0x0105 then
+    writeBytes(flag_reja, 0xF3)
+    writeBytes(flag_colision_reja, 0x00, 0x28, 0x5E, 0x71)
   end
   if real == 3  and flag == 4 and room_id == 0x0107 then
     real = 1
@@ -493,8 +529,8 @@ function skip_cutscene()
       end
       if room_id == 0x0304 then
         if room_304 == 0 then
-          saved_x = 5376
-          saved_y = 1360
+          saved_x = 5752
+          saved_y = 1704
         end
         if room_304 == 2 then
           teleport = true
@@ -556,6 +592,26 @@ function skip_cutscene()
         special_skip_allow = true
         teleport = false
         counter_flag_zero = 0
+      end
+    end
+  end
+  if second_teleport and not pending_restore then
+    print(string.format("second teleport"))
+    if room_id == 0x0406 then
+      saved_x = 63754
+      saved_y = 62633
+      saved_o = 2552
+      writeSmallInteger(coord_x_addr, saved_x)
+      writeSmallInteger(coord_y_addr, saved_y)
+      writeSmallInteger(coord_o_addr, saved_o)
+      capture_frame = capture_frame + 1
+      if capture_frame &gt;= 3 then
+        writeBytes(anim_addr, 0x00, 0x00)
+        writeBytes(entity_flag_addr, 0x03)
+        second_teleport = false
+        saved_x = 0
+        saved_y = 0
+        saved_o = 0
       end
     end
   end
@@ -690,14 +746,26 @@ function skip_cutscene()
   if pending_restore then
     local door_val = readInteger(door_anim_addr)
     if sys == 3 and door_val == 0 then
+      if room_id == 0x0406 and room_406 == 2 then
+        saved_x = 1260
+        saved_y = 64682
+        saved_o = 3234
+        print(string.format("first teleport"))
+        second_teleport = true
+      end
       writeSmallInteger(coord_x_addr, saved_x)
       writeSmallInteger(coord_y_addr, saved_y)
-      writeSmallInteger(coord_o_addr, saved_o)
+      if room_id ~= 0x0109 then
+        writeSmallInteger(coord_o_addr, saved_o)
+      end
       capture_frame = capture_frame + 1
       if capture_frame &gt;= 3 then
         writeBytes(anim_addr, 0x00, 0x00)
         writeBytes(entity_flag_addr, 0x03)
         pending_restore = false
+        saved_x = 0
+        saved_y = 0
+        saved_o = 0
       end
     end
   end
