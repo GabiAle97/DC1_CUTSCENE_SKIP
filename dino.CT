@@ -290,7 +290,7 @@ PUZZLE_ROOMS = {
   [0x050F] = true,
   [0x0610] = true,
   [0x0613] = true,
-  [0x0409] = true
+  [0x0409] = trues
 }
 
 saved_x = 0
@@ -323,6 +323,7 @@ room_409 = 0
 room_40C = 0
 room_406 = 0
 room_309 = 0
+room_50B = 0
 teleport = false
 second_teleport = false
 teleport_after_cutscene = false
@@ -379,6 +380,7 @@ function skip_cutscene()
     room_40C = 0
     room_406 = 0
     room_309 = 0
+    room_50B = 0
     teleport = false
     second_teleport = false
     teleport_after_cutscene = false
@@ -387,7 +389,7 @@ function skip_cutscene()
   if (room_id == 0x050A or room_id == 0x0509) and (action_done == 0x0012 or action_done == 0x1014 or action_done == 0x1016) then
     writeBytes(flag_action_done, 0x10, 0x00)
   end
-  if room_id == 0x0105 then
+  if room_id == 0x0105 and room_106 == 2 then
     writeBytes(flag_reja, 0xF3)
     writeBytes(flag_colision_reja, 0x00, 0x28, 0x5E, 0x71)
   end
@@ -691,7 +693,7 @@ function skip_cutscene()
       writeBytes(system_addr, 0x06, 0x00, 0x00, 0x00, 0x00)
       writeBytes(flag_addr, 0x00)
       pending_skip = false
-      if room_id == 0x030C then
+      if room_id == 0x030C and room_30C == 0 then
         saved_x = 64701
         saved_y = 8602
         saved_o = 3112
@@ -700,6 +702,9 @@ function skip_cutscene()
         saved_x = 64295
         saved_y = 62630
         saved_o = 3440
+      end
+      if room_id == 0x0205 and room_205 == 1 then
+        saved_o = 1936
       end
       pending_restore = true
       capture_frame = 0
@@ -738,6 +743,9 @@ function skip_cutscene()
         saved_y = 10546
         saved_o = 3040
       end
+      if room_id == 0x0301 then
+        saved_o = 3170
+      end
       pending_restore = true
       capture_frame = 0
     end
@@ -753,10 +761,15 @@ function skip_cutscene()
         print(string.format("first teleport"))
         second_teleport = true
       end
-      writeSmallInteger(coord_x_addr, saved_x)
-      writeSmallInteger(coord_y_addr, saved_y)
-      if room_id ~= 0x0109 then
-        writeSmallInteger(coord_o_addr, saved_o)
+      if room_id ~= 0x050B and room_50B ~= 0 then
+        writeSmallInteger(coord_x_addr, saved_x)
+        writeSmallInteger(coord_y_addr, saved_y)
+        if room_id ~= 0x0109 then
+          writeSmallInteger(coord_o_addr, saved_o)
+        end
+      end
+      if room_id == 0x050B and room_50B == 0 then
+        room_50B = room_50B + 1
       end
       capture_frame = capture_frame + 1
       if capture_frame &gt;= 3 then
