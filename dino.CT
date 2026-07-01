@@ -290,7 +290,7 @@ PUZZLE_ROOMS = {
   [0x050F] = true,
   [0x0610] = true,
   [0x0613] = true,
-  [0x0409] = trues
+  [0x0409] = true
 }
 
 saved_x = 0
@@ -761,15 +761,12 @@ function skip_cutscene()
         print(string.format("first teleport"))
         second_teleport = true
       end
-      if room_id ~= 0x050B and room_50B ~= 0 then
+      if room_id ~= 0x050B then
         writeSmallInteger(coord_x_addr, saved_x)
         writeSmallInteger(coord_y_addr, saved_y)
         if room_id ~= 0x0109 then
           writeSmallInteger(coord_o_addr, saved_o)
         end
-      end
-      if room_id == 0x050B and room_50B == 0 then
-        room_50B = room_50B + 1
       end
       capture_frame = capture_frame + 1
       if capture_frame &gt;= 3 then

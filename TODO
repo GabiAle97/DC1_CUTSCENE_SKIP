@@ -1,0 +1,15 @@
+TODOs:
+
+skip  minidinos
+jump 405 a 30C con skip flag 1
+jump 113 a 309 con skip flag 0
+no skipeó 303 (puede ser por las saves)
+posicionar a Regina en 5376:1360 en el primer skip
+jump 409 a 40A
+jump de 40A (o la siguiente) a 600
+
+SE PUDO:
+
+probar si reloadeando en 301 puedo saltar la decisión de cool it gale 5493:11198
+
+NO SE PUDO: 
