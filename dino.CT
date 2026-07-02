@@ -323,8 +323,8 @@ room_40C = 0
 room_406 = 0
 room_309 = 0
 room_50B = 0
+room_112 = 0
 teleport = false
-second_teleport = false
 teleport_after_cutscene = false
 special_skip_allow = false
 counter_flag_zero = 0
@@ -380,8 +380,8 @@ function skip_cutscene()
     room_406 = 0
     room_309 = 0
     room_50B = 0
+    room_112 = 0
     teleport = false
-    second_teleport = false
     teleport_after_cutscene = false
     special_skip_allow = false
   end
@@ -391,6 +391,9 @@ function skip_cutscene()
   if room_id == 0x0105 and room_106 == 2 then
     writeBytes(flag_reja, 0xF3)
     writeBytes(flag_colision_reja, 0x00, 0x28, 0x5E, 0x71)
+  end
+  if room_id == 0x010D and room_106 == 2 then
+    writeBytes(flag_colision_reja, 0x02, 0x38, 0x5F, 0x71)
   end
   if room_id == 0x0307 then
     writeBytes(flag_colision_reja, 0x00, 0x3A, 0x5F, 0x71)
@@ -475,14 +478,16 @@ function skip_cutscene()
       if room_50F == 0 then
         skip_allow = true
       end
+      if room_50F == 1 then
+        teleport_after_cutscene = true
+      end
     end
-    if room_id == 0x0609 and (room_609 == 0 or room_609 == 1) then
+    if room_id == 0x0609 and (room_609 == 0 or room_609 == 1 or room_609 == 2) then
       print(string.format("allowe con room_609 en %d", room_609))
       skip_allow = true
     end
     if room_id == 0x0609  and room_609 == 2 then
-      print(string.format("allow  %s, por si las dudas lo falseo", tostring(skip_allow)))
-      skip_allow = false
+      writeBytes(flag_colision_reja, 0x6A, 0xBA, 0x5F, 0x73)
     end    
     if room_id == 0x060F then
       skip_allow = true
@@ -498,9 +503,6 @@ function skip_cutscene()
     end
     if room_id == 0x030E and room_30E == 0 then
       teleport_after_cutscene = true
-    end
-    if room_id == 0x0406 and room_406 == 1 then
-      writeBytes(key_item_addr, 0x00, 0x40, 0x00, 0x84, 0x00, 0x00, 0x00, 0x10, 0x18)
     end
     if room_id == 0x0509 and room_509 == 0 then
       skip_allow = true
@@ -548,6 +550,9 @@ function skip_cutscene()
       if room_id == 0x040C then
         teleport_after_cutscene = true
       end
+      if room_id == 0x0112 and room_112 == 0 then
+        teleport_after_cutscene = true
+      end
     end
     skip_flag = 1
   end
@@ -582,6 +587,14 @@ function skip_cutscene()
     if room_id == 0x0309 and room_309 == 0 then
       writeBytes(room_addr, 0x0E, 0x03)
     end
+    if room_id == 0x0112 and room_112 == 0 then
+      writeBytes(room_addr, 0x0D, 0x01)
+      room_112 = room_112 + 1
+    end
+    if room_id == 0x050F and room_50F == 1 then
+      writeBytes(room_addr, 0x09, 0x06)
+      room_50B = room_50B + 1
+    end
     special_skip_allow = true
     teleport_after_cutscene = false
   end
@@ -596,26 +609,6 @@ function skip_cutscene()
         special_skip_allow = true
         teleport = false
         counter_flag_zero = 0
-      end
-    end
-  end
-  if second_teleport and not pending_restore then
-    print(string.format("second teleport"))
-    if room_id == 0x0406 then
-      saved_x = 63754
-      saved_y = 62633
-      saved_o = 2552
-      writeSmallInteger(coord_x_addr, saved_x)
-      writeSmallInteger(coord_y_addr, saved_y)
-      writeSmallInteger(coord_o_addr, saved_o)
-      capture_frame = capture_frame + 1
-      if capture_frame &gt;= 3 then
-        writeBytes(anim_addr, 0x00, 0x00)
-        writeBytes(entity_flag_addr, 0x03)
-        second_teleport = false
-        saved_x = 0
-        saved_y = 0
-        saved_o = 0
       end
     end
   end
@@ -757,13 +750,6 @@ function skip_cutscene()
       writeSmallInteger(coord_o_addr, saved_o)
     end
     if sys == 3 and door_val == 0 then
-      if room_id == 0x0406 and room_406 == 2 then
-        saved_x = 1260
-        saved_y = 64682
-        saved_o = 3234
-        print(string.format("first teleport"))
-        second_teleport = true
-      end
       if room_id ~= 0x050B then
         writeSmallInteger(coord_x_addr, saved_x)
         writeSmallInteger(coord_y_addr, saved_y)
