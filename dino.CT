@@ -392,6 +392,9 @@ function skip_cutscene()
     writeBytes(flag_reja, 0xF3)
     writeBytes(flag_colision_reja, 0x00, 0x28, 0x5E, 0x71)
   end
+  if room_id == 0x0307 then
+    writeBytes(flag_colision_reja, 0x00, 0x3A, 0x5F, 0x71)
+  end
   if real == 3  and flag == 4 and room_id == 0x0107 then
     real = 1
   end
