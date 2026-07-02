@@ -742,9 +742,6 @@ function skip_cutscene()
         saved_y = 10546
         saved_o = 3040
       end
-      if room_id == 0x0301 then
-        saved_o = 3170
-      end
       pending_restore = true
       capture_frame = 0
     end
@@ -752,6 +749,10 @@ function skip_cutscene()
 
   if pending_restore then
     local door_val = readInteger(door_anim_addr)
+    if room_id == 0x0301 then
+      saved_o = 3170
+      writeSmallInteger(coord_o_addr, saved_o)
+    end
     if sys == 3 and door_val == 0 then
       if room_id == 0x0406 and room_406 == 2 then
         saved_x = 1260
