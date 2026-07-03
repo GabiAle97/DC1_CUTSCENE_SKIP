@@ -482,11 +482,11 @@ function skip_cutscene()
         teleport_after_cutscene = true
       end
     end
-    if room_id == 0x0609 and (room_609 == 0 or room_609 == 1 or room_609 == 2) then
+    if room_id == 0x0609 and (room_609 == 0 or room_609 == 1 or room_609 == 3) then
       print(string.format("allowe con room_609 en %d", room_609))
       skip_allow = true
     end
-    if room_id == 0x0609  and room_609 == 2 then
+    if room_id == 0x0609  and room_609 == 3 then
       writeBytes(flag_colision_reja, 0x6A, 0xBA, 0x5F, 0x73)
     end    
     if room_id == 0x060F then
@@ -682,7 +682,7 @@ function skip_cutscene()
   end
 
   if pending_skip then
-    print(string.format("skip normal"))
+    print(string.format("skip normal %x", room_id))
     capture_frame = capture_frame + 1
     if capture_frame &gt;= 2 then
       writeBytes(system_addr, 0x06, 0x00, 0x00, 0x00, 0x00)
@@ -707,7 +707,7 @@ function skip_cutscene()
   end
 
   if special_skip_allow then
-    print(string.format("skip especial"))
+    print(string.format("skip especial %x", room_id))
     capture_frame = capture_frame + 1
     if capture_frame &gt;= 2 then
       writeBytes(system_addr, 0x06, 0x00, 0x00, 0x00, 0x00)
