@@ -682,9 +682,9 @@ function skip_cutscene()
   end
 
   if pending_skip then
-    print(string.format("skip normal %x", room_id))
     capture_frame = capture_frame + 1
     if capture_frame &gt;= 2 then
+    print(string.format("skip normal %x", room_id))
       writeBytes(system_addr, 0x06, 0x00, 0x00, 0x00, 0x00)
       writeBytes(flag_addr, 0x00)
       pending_skip = false
