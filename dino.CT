@@ -734,9 +734,9 @@ function skip_cutscene()
         saved_o = 32
       end
       if room_id == 0x040A then
-        saved_x = 11981
-        saved_y = 10546
-        saved_o = 3040
+        saved_x = 63790
+        saved_y = 61289
+        saved_o = 1146
       end
       pending_restore = true
       capture_frame = 0
