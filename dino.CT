@@ -242,7 +242,7 @@
 </Comments>
   <LuaScript>flag_addr = 0x006D3F64
 system_addr = 0x006D3E68
-cutscene_real_addr = 0x006DBADC
+cutscene_real_addr = 0x006D3EB0
 door_anim_addr = 0x0067B8A8
 room_addr = 0x006DD8F0   -- Current Room (2 bytes)
 key_item_addr = 0x006DD9DD   -- Key Item ID (2 bytes)
@@ -398,21 +398,15 @@ function skip_cutscene()
   if room_id == 0x0307 then
     writeBytes(flag_colision_reja, 0x00, 0x3A, 0x5F, 0x71)
   end
-  if real == 3  and flag == 4 and room_id == 0x0107 then
-    real = 1
-  end
-  if real == 3 and flag == 2 and room_id == 0x0608 then
-    real = 1
-  end
   if room_id == 0x0304 and flag == 4 and real == 0 and room_304 == 0 then
-    real = 1
+    real = 4
     room_304 = room_304 + 1
   end
   if room_id == 0x0309 and room_309 == 0 then
     teleport_after_cutscene = true
   end
   if room_id == 0x0615 or room_id == 0x030C or room_id == 0x050A or room_id == 0x0509 or room_id == 0x0408 then
-    if crane_init == 1 or (((room_id == 0x050A and real == 1) or (room_id == 0x050A and flag == 2) or (room_id == 0x0509 and real == 1) or (room_id == 0x0509 and flag == 2)) and action_done == 0x0010) or (room_id == 0x0408 and action_done_bis == 4) then
+    if crane_init == 1 or (((room_id == 0x050A and real ~= 0) or (room_id == 0x050A and flag == 2) or (room_id == 0x0509 and real ~= 0) or (room_id == 0x0509 and flag == 2)) and action_done == 0x0010) or (room_id == 0x0408 and action_done_bis == 4) then
       if not timer_enabled then
         timer_enabled = true
         timer_start_value = readInteger(timer_addr)
@@ -436,7 +430,7 @@ function skip_cutscene()
     end
   end
   -- Flanco ascendente de cutscene real, PERO excluyendo la sala del puzzle
-  if real == 1 and not pending_skip and not pending_restore then
+  if real ~= 0 and not pending_skip and not pending_restore then
     
     if room_id == 0x010F and room_10F == 1 then
       skip_allow = true
@@ -519,10 +513,6 @@ function skip_cutscene()
         if room_30C == 1 then
           writeBytes(key_item_addr, 0x00, 0x60, 0x00, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00)
         end
-        if room_30C == 0 then
-          saved_x = 63500
-          saved_y = 8200
-        end
       end
       if room_id == 0x0202 and room_202 == 0 then
         writeBytes(key_item_addr, 0x00, 0x00, 0x60, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04)
@@ -565,10 +555,8 @@ function skip_cutscene()
   if teleport_after_cutscene then
     if room_id == 0x060F then
       if room_60F == 0 then
-        writeBytes(room_addr, 0x0F, 0x06)
-        room_60F = room_60F + 1
-      else
         writeBytes(room_addr, 0x0C, 0x03)
+        print(string.format("teleporting after cutscene to room %x", room_id))
         room_60F = room_60F + 1
       end
     end
@@ -682,65 +670,61 @@ function skip_cutscene()
   end
 
   if pending_skip then
-    capture_frame = capture_frame + 1
-    if capture_frame &gt;= 2 then
     print(string.format("skip normal %x", room_id))
-      writeBytes(system_addr, 0x06, 0x00, 0x00, 0x00, 0x00)
-      writeBytes(flag_addr, 0x00)
-      pending_skip = false
-      if room_id == 0x030C and room_30C == 0 then
-        saved_x = 64701
-        saved_y = 8602
-        saved_o = 3112
-      end
-      if room_id == 0x0609 and room_609 == 0 then
-        saved_x = 64295
-        saved_y = 62630
-        saved_o = 3440
-      end
-      if room_id == 0x0205 and room_205 == 1 then
-        saved_o = 1936
-      end
-      pending_restore = true
-      capture_frame = 0
+    writeBytes(system_addr, 0x06, 0x00, 0x00, 0x00, 0x00)
+    writeBytes(flag_addr, 0x00)
+    pending_skip = false
+    if room_id == 0x030C and room_30C == 0 then
+      saved_x = 64701
+      saved_y = 8602
+      saved_o = 3112
     end
+    if room_id == 0x0609 and room_609 == 0 then
+      saved_x = 64295
+      saved_y = 62630
+      saved_o = 3440
+    end
+    if room_id == 0x0205 and room_205 == 1 then
+      saved_o = 1936
+    end
+    pending_restore = true
+    capture_frame = 0
   end
 
   if special_skip_allow then
     print(string.format("skip especial %x", room_id))
-    capture_frame = capture_frame + 1
-    if capture_frame &gt;= 2 then
-      writeBytes(system_addr, 0x06, 0x00, 0x00, 0x00, 0x00)
-      special_skip_allow = false
-      if room_id == 0x0600 then
-        saved_x = 58055
-        saved_y = 8125
-      end
-      if room_id == 0x0304 then
-        saved_x = 5493
-        saved_y = 11198
-      end
-      if room_id == 0x0307 then
-        saved_x = 1204
-        saved_y = 62598
-        saved_o = 1000
-      end
-      if room_id == 0x030C then
-        room_30C = room_30C + 2
-      end
-      if room_id == 0x030E then
-        saved_x = 64867
-        saved_y = 56048
-        saved_o = 32
-      end
-      if room_id == 0x040A then
-        saved_x = 63790
-        saved_y = 61289
-        saved_o = 1146
-      end
-      pending_restore = true
-      capture_frame = 0
+    writeBytes(system_addr, 0x06, 0x00, 0x00, 0x00, 0x00)
+    special_skip_allow = false
+    if room_id == 0x0600 then
+      saved_x = 58055
+      saved_y = 8125
     end
+    if room_id == 0x0304 then
+      saved_x = 5493
+      saved_y = 11198
+    end
+    if room_id == 0x0307 then
+      saved_x = 1204
+      saved_y = 62598
+      saved_o = 1000
+    end
+    if room_id == 0x030E then
+      saved_x = 64867
+      saved_y = 56048
+      saved_o = 32
+    end
+    if room_id == 0x0409 then
+      saved_x = 63790
+      saved_y = 61289
+      saved_o = 1146
+    end
+    if room_id == 0x060F and room_60F == 1 then
+      saved_x = 64701
+      saved_y = 8602
+      saved_o = 3112
+    end
+    pending_restore = true
+    capture_frame = 0
   end
 
   if pending_restore then
@@ -751,6 +735,7 @@ function skip_cutscene()
     end
     if sys == 3 and door_val == 0 then
       if room_id ~= 0x050B then
+        print(string.format("restoring position: x=%d, y=%d, o=%d", saved_x, saved_y, saved_o))
         writeSmallInteger(coord_x_addr, saved_x)
         writeSmallInteger(coord_y_addr, saved_y)
         if room_id ~= 0x0109 then
@@ -758,7 +743,7 @@ function skip_cutscene()
         end
       end
       capture_frame = capture_frame + 1
-      if capture_frame &gt;= 3 then
+      if capture_frame &gt;= 5 then
         writeBytes(anim_addr, 0x00, 0x00)
         writeBytes(entity_flag_addr, 0x03)
         pending_restore = false
