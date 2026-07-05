@@ -10,8 +10,9 @@
     <CheatEntry>
       <ID>62</ID>
       <Description>"Flag de Cutscene"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
       <VariableType>4 Bytes</VariableType>
-      <Address>dino.exe+2DBADC</Address>
+      <Address>006D3EB0</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>8</ID>
@@ -238,6 +239,7 @@
       <Address>0x006DC09B</Address>
     </CheatEntry>
   </CheatEntries>
+  <UserdefinedSymbols/>
   <Comments>Info about this table:
 </Comments>
   <LuaScript>flag_addr = 0x006D3F64
@@ -289,7 +291,9 @@ PUZZLE_ROOMS = {
   [0x050F] = true,
   [0x0610] = true,
   [0x0613] = true,
-  [0x0409] = true
+  [0x0409] = true,
+  [0x0614] = true,
+  [0x0611] = true
 }
 
 saved_x = 0
@@ -388,6 +392,9 @@ function skip_cutscene()
   if (room_id == 0x050A or room_id == 0x0509) and (action_done == 0x0012 or action_done == 0x1014 or action_done == 0x1016) then
     writeBytes(flag_action_done, 0x10, 0x00)
   end
+  if room_id == 0x0611 and real ~= 0 and action_done == 0x1006 then
+    writeBytes(flag_action_done, 0x04, 0x10)
+  end
   if room_id == 0x0105 and room_106 == 2 then
     writeBytes(flag_reja, 0xF3)
     writeBytes(flag_colision_reja, 0x00, 0x28, 0x5E, 0x71)
@@ -405,15 +412,15 @@ function skip_cutscene()
   if room_id == 0x0309 and room_309 == 0 then
     teleport_after_cutscene = true
   end
-  if room_id == 0x0615 or room_id == 0x030C or room_id == 0x050A or room_id == 0x0509 or room_id == 0x0408 then
-    if crane_init == 1 or (((room_id == 0x050A and real ~= 0) or (room_id == 0x050A and flag == 2) or (room_id == 0x0509 and real ~= 0) or (room_id == 0x0509 and flag == 2)) and action_done == 0x0010) or (room_id == 0x0408 and action_done_bis == 4) then
+  if room_id == 0x0615 or room_id == 0x030C or room_id == 0x050A or room_id == 0x0509 or room_id == 0x0408 or room_id == 0x0614 or room_id == 0x0611 then
+    if crane_init == 1 or (((room_id == 0x050A and real ~= 0) or (room_id == 0x050A and flag == 2) or (room_id == 0x0509 and real ~= 0) or (room_id == 0x0509 and flag == 2)) and action_done == 0x0010) or (room_id == 0x0408 and action_done_bis == 4) or (room_id == 0x0614 and real ~= 0) or (room_id == 0x0611 and real ~= 0) then
       if not timer_enabled then
         timer_enabled = true
         timer_start_value = readInteger(timer_addr)
         real_time_start = getTickCount()
         speedhack_setSpeed(speedhack_multiplier)
       end
-    elseif crane_init == 0 or (room_id == 0x050A and real == 0 and flag == 0) or (room_id == 0x0509 and real == 0 and flag == 0)  or (room_id == 0x0408 and action_done_bis == 0) then
+    elseif crane_init == 0 or (room_id == 0x050A and real == 0 and flag == 0) or (room_id == 0x0509 and real == 0 and flag == 0)  or (room_id == 0x0408 and action_done_bis == 0) or (room_id == 0x0614 and real == 0) or (room_id == 0x0611 and real == 0) then
       if timer_enabled then
         -- Calcular el tiempo real transcurrido
         local elapsed_real_ms = getTickCount() - real_time_start
@@ -734,7 +741,7 @@ function skip_cutscene()
       writeSmallInteger(coord_o_addr, saved_o)
     end
     if sys == 3 and door_val == 0 then
-      if room_id ~= 0x050B then
+      if room_id ~= 0x050B or not (room_id == 0x030C and room_30C == 1) then
         print(string.format("restoring position: x=%d, y=%d, o=%d", saved_x, saved_y, saved_o))
         writeSmallInteger(coord_x_addr, saved_x)
         writeSmallInteger(coord_y_addr, saved_y)
