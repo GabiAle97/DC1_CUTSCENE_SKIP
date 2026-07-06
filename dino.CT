@@ -261,6 +261,7 @@ flag_action_done = 0x006D3E7C
 flag_action_done_bis = 0x006D3E80
 flag_reja = 0x006DC09B
 flag_colision_reja = 0x006DD930
+flag_caja = 0x006D5B2D
 
 PUZZLE_ROOMS = {
   [0x010F] = true,   -- Puzzle de fusibles
@@ -328,6 +329,7 @@ room_309 = 0
 room_50B = 0
 room_112 = 0
 teleport = false
+second_teleport = false
 teleport_after_cutscene = false
 special_skip_allow = false
 counter_flag_zero = 0
@@ -350,6 +352,7 @@ function skip_cutscene()
   local crane_init = readBytes(flag_crane, 1, false)
   local action_done = readSmallInteger(flag_action_done)
   local action_done_bis = readBytes(flag_action_done_bis, 1, false)
+  local caja_move = readBytes(flag_caja, 1, false)
   
   if room_id == 0x0000 then
     saved_x = 0
@@ -385,6 +388,7 @@ function skip_cutscene()
     room_50B = 0
     room_112 = 0
     teleport = false
+    second_teleport = false
     teleport_after_cutscene = false
     special_skip_allow = false
   end
@@ -411,15 +415,15 @@ function skip_cutscene()
   if room_id == 0x0309 and room_309 == 0 then
     teleport_after_cutscene = true
   end
-  if room_id == 0x0615 or room_id == 0x030C or room_id == 0x050A or room_id == 0x0509 or room_id == 0x0408 or room_id == 0x0614 or room_id == 0x0611 then
-    if crane_init == 1 or (((room_id == 0x050A and real ~= 0) or (room_id == 0x050A and flag == 2) or (room_id == 0x0509 and real ~= 0) or (room_id == 0x0509 and flag == 2)) and action_done == 0x0010) or (room_id == 0x0408 and action_done_bis == 4) or (room_id == 0x0614 and real ~= 0) or (room_id == 0x0611 and real ~= 0) then
+  if room_id == 0x0615 or room_id == 0x0402 or room_id == 0x030C or room_id == 0x050A or room_id == 0x0509 or room_id == 0x0408 or room_id == 0x0614 or room_id == 0x0611 then
+    if crane_init == 1 or (room_id == 0x0402 and caja_move == 255) or (((room_id == 0x050A and real ~= 0) or (room_id == 0x050A and flag == 2) or (room_id == 0x0509 and real ~= 0) or (room_id == 0x0509 and flag == 2)) and action_done == 0x0010) or (room_id == 0x0408 and action_done_bis == 4) or (room_id == 0x0614 and real ~= 0) or (room_id == 0x0611 and real ~= 0) then
       if not timer_enabled then
         timer_enabled = true
         timer_start_value = readInteger(timer_addr)
         real_time_start = getTickCount()
         speedhack_setSpeed(speedhack_multiplier)
       end
-    elseif crane_init == 0 or (room_id == 0x050A and real == 0 and flag == 0) or (room_id == 0x0509 and real == 0 and flag == 0)  or (room_id == 0x0408 and action_done_bis == 0) or (room_id == 0x0614 and real == 0) or (room_id == 0x0611 and real == 0) then
+    elseif crane_init == 0 or caja_move == 0 or (room_id == 0x050A and real == 0 and flag == 0) or (room_id == 0x0509 and real == 0 and flag == 0)  or (room_id == 0x0408 and action_done_bis == 0) or (room_id == 0x0614 and real == 0) or (room_id == 0x0611 and real == 0) then
       if timer_enabled then
         -- Calcular el tiempo real transcurrido
         local elapsed_real_ms = getTickCount() - real_time_start
@@ -485,6 +489,9 @@ function skip_cutscene()
     if room_id == 0x0609 and (room_609 == 0 or room_609 == 1 or room_609 == 3) then
       print(string.format("allowe con room_609 en %d", room_609))
       skip_allow = true
+      if room_609 == 0 then
+        second_teleport = true
+      end
     end
     if room_id == 0x0609  and room_609 == 3 then
       writeBytes(flag_colision_reja, 0x6A, 0xBA, 0x5F, 0x73)
@@ -558,6 +565,16 @@ function skip_cutscene()
     writeInteger(timer_addr, timer_start_value)
   end
 
+  if second_teleport then
+    if room_id == 0x0609 and room_609 == 0 then
+      if capture_frame &gt;= 5 then
+        writeSmallInteger(coord_x_addr, 65042)
+        writeSmallInteger(coord_y_addr, 4477)
+        writeSmallInteger(coord_o_addr, 2888)
+        second_teleport = false
+      end
+    end
+  end
   if teleport_after_cutscene then
     if room_id == 0x060F then
       if room_60F == 0 then
@@ -686,9 +703,9 @@ function skip_cutscene()
       saved_o = 3112
     end
     if room_id == 0x0609 and room_609 == 0 then
-      saved_x = 64295
-      saved_y = 62630
-      saved_o = 3440
+      saved_x = 65090
+      saved_y = 64751
+      saved_o = 130
     end
     if room_id == 0x0205 and room_205 == 1 then
       saved_o = 1936
