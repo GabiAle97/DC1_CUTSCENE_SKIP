@@ -387,6 +387,7 @@ function skip_cutscene()
     room_309 = 0
     room_50B = 0
     room_112 = 0
+    timer_enabled = false
     teleport = false
     second_teleport = false
     teleport_after_cutscene = false
