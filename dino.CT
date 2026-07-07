@@ -353,7 +353,11 @@ function skip_cutscene()
   local action_done = readSmallInteger(flag_action_done)
   local action_done_bis = readBytes(flag_action_done_bis, 1, false)
   local caja_move = readBytes(flag_caja, 1, false)
-  
+  if room_id == 0x0600 then
+    print(string.format("timer_enabled: %s", tostring(timer_enabled)))
+    timer_enabled = false
+    speedhack_setSpeed(1.0)
+  end
   if room_id == 0x0000 then
     saved_x = 0
     saved_y = 0
@@ -416,8 +420,8 @@ function skip_cutscene()
   if room_id == 0x0309 and room_309 == 0 then
     teleport_after_cutscene = true
   end
-  if room_id == 0x0615 or room_id == 0x0402 or room_id == 0x030C or room_id == 0x050A or room_id == 0x0509 or room_id == 0x0408 or room_id == 0x0614 or room_id == 0x0611 then
-    if crane_init == 1 or (room_id == 0x0402 and caja_move == 255) or (((room_id == 0x050A and real ~= 0) or (room_id == 0x050A and flag == 2) or (room_id == 0x0509 and real ~= 0) or (room_id == 0x0509 and flag == 2)) and action_done == 0x0010) or (room_id == 0x0408 and action_done_bis == 4) or (room_id == 0x0614 and real ~= 0) or (room_id == 0x0611 and real ~= 0) then
+  if room_id == 0x0615 or room_id == 0x0402 or room_id == 0x030C or room_id == 0x050A or room_id == 0x0509 or room_id == 0x0408 or room_id == 0x0614 or room_id == 0x0611 or room_id == 0x0508 or room_id == 0x0609 then
+    if crane_init == 1 or ((room_id == 0x0402 or room_id == 0x030C or room_id == 0x0615) and caja_move == 255) or (((room_id == 0x050A and real ~= 0) or (room_id == 0x050A and flag == 2) or (room_id == 0x0509 and real ~= 0) or (room_id == 0x0509 and flag == 2)) and action_done == 0x0010) or ((room_id == 0x0408 or room_id == 0x0609) and action_done_bis == 4) or (room_id == 0x0614 and real ~= 0) or (room_id == 0x0508 and action_done_bis == 6) or (room_id == 0x0611 and real ~= 0) then
       if not timer_enabled then
         timer_enabled = true
         timer_start_value = readInteger(timer_addr)
