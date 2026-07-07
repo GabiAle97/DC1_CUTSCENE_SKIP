@@ -757,7 +757,7 @@ function skip_cutscene()
       writeSmallInteger(coord_o_addr, saved_o)
     end
     if sys == 3 and door_val == 0 then
-      if room_id ~= 0x050B or not (room_id == 0x030C and room_30C == 1) then
+      if room_id ~= 0x050B and not (room_id == 0x030C and room_30C == 1) then
         print(string.format("restoring position: x=%d, y=%d, o=%d", saved_x, saved_y, saved_o))
         writeSmallInteger(coord_x_addr, saved_x)
         writeSmallInteger(coord_y_addr, saved_y)
