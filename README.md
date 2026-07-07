@@ -2,7 +2,11 @@
 
 ** ABOUT **
 
-LUA Script de Cheat engine que detecta cutscenes y las skippea. Se intenta hacer una solución más elegante que simplemente usar el speedhack para acelerar las cutscenes, lo que impacta tambien en el IGT. Con esto, se puede terminar el juego en menos de una hora.
+LUA Script de Cheat engine que detecta cutscenes y las skippea. Principalmente se basa en skips completos, y en la menor cantidad de escenas aceleradas posibles (como animaciones de escalera, puertas, movimiento de puzzles, escenas imposibles de saltear, etc). Actualmente, es posible terminar tanto la ruta Any% como la ruta Best Ending en +- 30 minutos. 
+
+** NOTA IMPORTANTE **
+
+Este script recolecta el número de veces que que se skipean escenas durante una run completa para decidir si está habilitado a skipear o no, o si debe cargar un objeto en inventario, o si debe cambiar IDs internos de decision, por lo que cargar un juego guardado con el cutscene skip, salvo muy pocas excepciones, puede ocasionar errores en la ruta que se quiere tomar, incluso generar crashes. De momento, evitar el uso de partidas guardadas hasta que se pueda solventar este problema.
 
 ** HOW TO USE **
 
