@@ -4,7 +4,7 @@
 [![Español](https://img.shields.io/badge/Language-Español-red)](README.md)
 [![English](https://img.shields.io/badge/Language-English-blue)](README.en.md)
 [![Código Fuente](https://shields.io/badge/Código-Fuente-green)](script.lua)
-[![Seguridad](https://shields.io/badge/Análisis-seguridad-yellow)](https://virustotal.com)
+[![Seguridad](https://shields.io/badge/Análisis-seguridad-yellow)](https://www.virustotal.com/gui/file/ae29bb54a3a3d8caf429609da6da49d1c023539f0c192d366cf70e54dbd46afb/detection)
 
 ## SOBRE EL SCRIPT
 
