@@ -12,6 +12,10 @@ Este script recolecta el número de veces que que se skipean escenas durante una
 
 Cargar el juego en Cheat Engine, y luego cargar el archivo DINO.CT para asociar el LUA con el juego. Al aceptar la ejecución del script, ya estará activado el cutscene skip.
 
+Si no se desea usar Cheat Engine, existe la opción de usar el EXE dentro de este repositorio.
+Este EXE es detectado por los antivirus como un "malware" por el manejo de direcciones de memoria, pero como son solamente propias del juego, no representan un peligro para el usuario, siendo un "falso positivo" para los antivirus. Esto puede ser corroborado en el código mismo presente en este repositorio.
+Para utilizarlo, es necesario agregar dicho EXE a las excepciones del antivirus, o desactivarlo totalmente (no recomendado).
+
 Combinar con [DinoReady Patch DoorSkip](https://www.speedrun.com/dino1/resources/kzgcz) para una experiencia muchísimo más fluida.
 
 ** THANKS **
