@@ -1,0 +1,546 @@
+flag_addr = 0x006D3F64
+system_addr = 0x006D3E68
+cutscene_real_addr = 0x006D3EB0
+door_anim_addr = 0x0067B8A8
+room_addr = 0x006DD8F0   -- Current Room (2 bytes)
+key_item_addr = 0x006DD9DD   -- Key Item ID (2 bytes)
+
+coord_x_addr = 0x006D58AC
+coord_y_addr = 0x006D58A8
+coord_o_addr = 0x006D58B2
+
+anim_addr = 0x006D58C5
+entity_flag_addr = 0x006D58B8
+
+float_304_addr = 0x00677D28
+flag_crane = 0x006DCE5E
+flag_action_done = 0x006D3E7C
+flag_action_done_bis = 0x006D3E80
+flag_reja = 0x006DC09B
+flag_colision_reja = 0x006DD930
+flag_caja = 0x006D5B2D
+
+PUZZLE_ROOMS = {
+  [0x010F] = true,   -- Puzzle de fusibles
+  [0x0103] = true,   -- 0375
+  [0x0202] = true,   -- Dino Merquero
+  [0x030B] = true,   -- Puzzle de fusibles 2 (Ascensor)
+  [0x0106] = true,   -- Decision
+  [0x030E] = true,   -- Enfermeria
+  [0x0405] = true,    -- Puzzle Tubos
+  [0x0113] = true,    -- Antes Elevador
+  [0x0309] = true,    -- Despues Elevador
+  [0x0304] = true,    -- Decision 2
+  [0x030C] = true,    -- Gail y Kirk
+  [0x0106] = true,    -- Elevador 2
+  [0x0201] = true,    -- Softlock Dino Merquero
+  [0x060F] = true,
+  [0x0403] = true,
+  [0x0307] = true,
+  [0x0205] = true,
+  [0x0600] = true,
+  [0x0608] = true,
+  [0x0609] = true,
+  [0x0601] = true,
+  [0x0604] = true,
+  [0x0509] = true,
+  [0x050A] = true,
+  [0x050F] = true,
+  [0x0610] = true,
+  [0x0613] = true,
+  [0x0409] = true,
+  [0x0614] = true,
+  [0x0611] = true
+}
+
+saved_x = 0
+saved_y = 0
+saved_o = 0
+pending_skip = false
+pending_restore = false
+capture_frame = 0
+skip_flag = 0
+counter = 0
+skip_allow = false
+room_610 = 0
+room_106 = 0
+room_405 = 0
+room_30C = 0
+room_304 = 0
+room_30E = 0
+room_202 = 0
+room_30B = 0
+room_10F = 0
+room_205 = 0
+room_600 = 0
+room_608 = 0
+room_609 = 0
+room_601 = 0
+room_50F = 0
+room_60F = 0
+room_509 = 0
+room_409 = 0
+room_40C = 0
+room_406 = 0
+room_309 = 0
+room_50B = 0
+room_112 = 0
+teleport = false
+second_teleport = false
+teleport_after_cutscene = false
+special_skip_allow = false
+counter_flag_zero = 0
+
+-- Ralentizador (nueva versión)
+timer_addr = 0x006DD8F4
+timer_enabled = false
+timer_start_value = 0
+real_time_start = 0
+timer_units_per_second = 60   -- ajústalo con tu medición real
+speedhack_multiplier = 5000.0    -- 5.0 para 500%, 500.0 para 50000%
+
+-- Skipeador
+
+function skip_cutscene()
+  local flag = readBytes(flag_addr, 1, false)
+  local sys = readBytes(system_addr, 1, false)
+  local real = readBytes(cutscene_real_addr, 1, false)
+  local room_id = readSmallInteger(room_addr)
+  local crane_init = readBytes(flag_crane, 1, false)
+  local action_done = readSmallInteger(flag_action_done)
+  local action_done_bis = readBytes(flag_action_done_bis, 1, false)
+  local caja_move = readBytes(flag_caja, 1, false)
+  if room_id == 0x0600 then
+    print(string.format("timer_enabled: %s", tostring(timer_enabled)))
+    timer_enabled = false
+    speedhack_setSpeed(1.0)
+  end
+  if room_id == 0x0000 then
+    saved_x = 0
+    saved_y = 0
+    saved_o = 0
+    pending_skip = false
+    pending_restore = false
+    capture_frame = 0
+    skip_flag = 0
+    counter = 0
+    skip_allow = false
+    room_106 = 0
+    room_405 = 0
+    room_30C = 0
+    room_304 = 0
+    room_30E = 0
+    room_202 = 0
+    room_30B = 0
+    room_10F = 0
+    room_205 = 0
+    room_600 = 0
+    room_608 = 0
+    room_609 = 0
+    room_601 = 0
+    room_50F = 0
+    room_60F = 0
+    room_610 = 0
+    room_509 = 0
+    room_409 = 0
+    room_40C = 0
+    room_406 = 0
+    room_309 = 0
+    room_50B = 0
+    room_112 = 0
+    timer_enabled = false
+    teleport = false
+    second_teleport = false
+    teleport_after_cutscene = false
+    special_skip_allow = false
+  end
+  if (room_id == 0x050A or room_id == 0x0509) and (action_done == 0x0012 or action_done == 0x1014 or action_done == 0x1016) then
+    writeBytes(flag_action_done, 0x10, 0x00)
+  end
+  if room_id == 0x0611 and real ~= 0 and action_done == 0x1006 then
+    writeBytes(flag_action_done, 0x04, 0x10)
+  end
+  if room_id == 0x0105 and room_106 == 2 then
+    writeBytes(flag_reja, 0xF3)
+    writeBytes(flag_colision_reja, 0x00, 0x28, 0x5E, 0x71)
+  end
+  if room_id == 0x010D and room_106 == 2 then
+    writeBytes(flag_colision_reja, 0x02, 0x38, 0x5F, 0x71)
+  end
+  if room_id == 0x0307 then
+    writeBytes(flag_colision_reja, 0x00, 0x3A, 0x5F, 0x71)
+  end
+  if room_id == 0x0304 and flag == 4 and real == 0 and room_304 == 0 then
+    real = 4
+    room_304 = room_304 + 1
+  end
+  if room_id == 0x0309 and room_309 == 0 then
+    teleport_after_cutscene = true
+  end
+  if room_id == 0x0615 or room_id == 0x0402 or room_id == 0x030C or room_id == 0x050A or room_id == 0x0509 or room_id == 0x0408 or room_id == 0x0614 or room_id == 0x0611 or room_id == 0x0508 or room_id == 0x0609 then
+    if crane_init == 1 or ((room_id == 0x0402 or room_id == 0x030C or room_id == 0x0615) and caja_move == 255) or (((room_id == 0x050A and real ~= 0) or (room_id == 0x050A and flag == 2) or (room_id == 0x0509 and real ~= 0) or (room_id == 0x0509 and flag == 2)) and action_done == 0x0010) or ((room_id == 0x0408 or room_id == 0x0609) and action_done_bis == 4) or (room_id == 0x0614 and real ~= 0) or (room_id == 0x0508 and action_done_bis == 6) or (room_id == 0x0611 and real ~= 0) then
+      if not timer_enabled then
+        timer_enabled = true
+        timer_start_value = readInteger(timer_addr)
+        real_time_start = getTickCount()
+        speedhack_setSpeed(speedhack_multiplier)
+      end
+    elseif crane_init == 0 or caja_move == 0 or (room_id == 0x050A and real == 0 and flag == 0) or (room_id == 0x0509 and real == 0 and flag == 0)  or (room_id == 0x0408 and action_done_bis == 0) or (room_id == 0x0614 and real == 0) or (room_id == 0x0611 and real == 0) then
+      if timer_enabled then
+        -- Calcular el tiempo real transcurrido
+        local elapsed_real_ms = getTickCount() - real_time_start
+        -- 1/5 de ese tiempo real (sin importar el speedhack)
+        local elapsed_slow_ms = elapsed_real_ms / 5
+        -- Convertir a unidades del timer (30 unidades/segundo) y redondear al entero más cercano
+        local elapsed_units = math.floor(elapsed_slow_ms * timer_units_per_second / 1000 + 0.5)
+        -- Valor final con un pequeño offset de 30 unidades (1 segundo) para compensar el retraso inicial
+        local final_value = timer_start_value + elapsed_units + 30
+        writeInteger(timer_addr, final_value)
+        timer_enabled = false
+        speedhack_setSpeed(1.0)
+      end
+    end
+  end
+  -- Flanco ascendente de cutscene real, PERO excluyendo la sala del puzzle
+  if real ~= 0 and not pending_skip and not pending_restore then
+    
+    if room_id == 0x010F and room_10F == 1 then
+      skip_allow = true
+    end
+    if room_id == 0x0304 then
+      skip_allow = true
+    end
+    if room_id == 0x0106 and (room_106 == 0 or room_106 == 1) then
+      skip_allow = true
+    end
+    if room_id == 0x0405 and (room_405 == 0 or room_405 == 2) then
+      skip_allow = true
+    end
+    if room_id == 0x030C and (room_30C &lt;= 1 or room_30C == 2) then
+      skip_allow = true
+    end
+    if room_id == 0x030E and room_30E == 0 then
+      skip_allow = true
+    end
+    if room_id == 0x0202 then
+      skip_allow = true
+    end
+    if room_id == 0x030B and room_30B == 1 then
+      skip_allow = true
+    end
+    if room_id == 0x0205 and (room_205 == 1 or room_205 == 2) then
+      skip_allow = true
+    end
+    if room_id == 0x0600 and (room_600 == 2 or room_600 == 3) then
+      skip_allow = true
+    end
+    if room_id == 0x0600 and room_600 == 1 then
+      special_skip_allow = true
+    end
+    if room_id == 0x0608 and room_608 == 1 then
+      skip_allow = true
+    end
+    if room_id == 0x050F then
+      if room_50F == 0 then
+        skip_allow = true
+      end
+      if room_50F == 1 then
+        teleport_after_cutscene = true
+      end
+    end
+    if room_id == 0x0609 and (room_609 == 0 or room_609 == 1 or room_609 == 3) then
+      print(string.format("allowe con room_609 en %d", room_609))
+      skip_allow = true
+      if room_609 == 0 then
+        second_teleport = true
+      end
+    end
+    if room_id == 0x0609  and room_609 == 3 then
+      writeBytes(flag_colision_reja, 0x6A, 0xBA, 0x5F, 0x73)
+    end    
+    if room_id == 0x060F then
+      skip_allow = true
+    end
+    if room_id == 0x0610 and room_610 == 0 then
+      skip_allow = true
+    end
+    if room_id == 0x0307 then
+      special_skip_allow = true
+    end
+    if room_id == 0x0409 then
+      teleport_after_cutscene = true
+    end
+    if room_id == 0x030E and room_30E == 0 then
+      teleport_after_cutscene = true
+    end
+    if room_id == 0x0509 and room_509 == 0 then
+      skip_allow = true
+    end
+    if not PUZZLE_ROOMS[room_id] or skip_allow then
+      
+      saved_x = readSmallInteger(coord_x_addr)
+      saved_y = readSmallInteger(coord_y_addr)
+      saved_o = readSmallInteger(coord_o_addr)
+      pending_skip = true
+      capture_frame = 0
+      skip_allow = false
+      if room_id == 0x030C then
+        if room_30C == 1 then
+          writeBytes(key_item_addr, 0x00, 0x60, 0x00, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00)
+        end
+      end
+      if room_id == 0x0202 and room_202 == 0 then
+        writeBytes(key_item_addr, 0x00, 0x00, 0x60, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04)
+      end
+      if room_id == 0x050E then
+        writeBytes(key_item_addr, 0x00, 0x60, 0x15, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00)
+      end
+      if room_id == 0x0610 and room_610 == 0 then
+        writeBytes(key_item_addr, 0x00, 0x20, 0x1D, 0x04, 0x00, 0x10, 0x01, 0x00, 0x00)
+      end
+      if room_id == 0x0304 then
+        if room_304 == 0 then
+          saved_x = 5752
+          saved_y = 1704
+        end
+        if room_304 == 2 then
+          teleport = true
+        end
+      end
+      if room_id == 0x060F then
+        if room_60F == 0 or room_60F == 1 then
+          teleport_after_cutscene = true
+        end
+      end
+      if room_id == 0x040C then
+        teleport_after_cutscene = true
+      end
+      if room_id == 0x0112 and room_112 == 0 then
+        teleport_after_cutscene = true
+      end
+    end
+    skip_flag = 1
+  end
+
+  -- Ralentizador del IGT (basado en tiempo real)
+  if timer_enabled then
+    writeInteger(timer_addr, timer_start_value)
+  end
+
+  if second_teleport then
+    if room_id == 0x0609 and room_609 == 0 then
+      if capture_frame &gt;= 5 then
+        writeSmallInteger(coord_x_addr, 65042)
+        writeSmallInteger(coord_y_addr, 4477)
+        writeSmallInteger(coord_o_addr, 2888)
+        second_teleport = false
+      end
+    end
+  end
+  if teleport_after_cutscene then
+    if room_id == 0x060F then
+      if room_60F == 0 then
+        writeBytes(room_addr, 0x0C, 0x03)
+        print(string.format("teleporting after cutscene to room %x", room_id))
+        room_60F = room_60F + 1
+      end
+    end
+    if room_id == 0x0409 and room_409 == 0 then
+      writeBytes(room_addr, 0x0A, 0x04)
+      room_409 = room_409 + 1
+    end
+    if room_id == 0x040C and room_40C == 0 then
+      writeBytes(room_addr, 0x00, 0x06)
+      room_40C = room_40C + 1
+    end
+    if room_id == 0x030E and room_30E == 0 then
+      writeBytes(room_addr, 0x09, 0x03)
+      room_309 = room_309 + 1
+    end
+    if room_id == 0x0309 and room_309 == 0 then
+      writeBytes(room_addr, 0x0E, 0x03)
+    end
+    if room_id == 0x0112 and room_112 == 0 then
+      writeBytes(room_addr, 0x0D, 0x01)
+      room_112 = room_112 + 1
+    end
+    if room_id == 0x050F and room_50F == 1 then
+      writeBytes(room_addr, 0x09, 0x06)
+      room_50B = room_50B + 1
+    end
+    special_skip_allow = true
+    teleport_after_cutscene = false
+  end
+  if teleport then
+    flag_zero = readBytes(float_304_addr, 1, false)
+    if flag_zero ~= 0 then
+      counter_flag_zero = counter_flag_zero + 1
+      if counter_flag_zero == 4 then
+        if room_id == 0x0304 then
+          writeBytes(room_addr, 0x01, 0x03)
+        end
+        special_skip_allow = true
+        teleport = false
+        counter_flag_zero = 0
+      end
+    end
+  end
+
+  if real == 0 and skip_flag == 1 then
+    skip_flag = 0
+    if room_id == 0x0202 then
+      room_202 = room_202 + 1
+    end
+    if room_id == 0x030B then
+      room_30B = room_30B + 1
+    end
+    if room_id == 0x010F then
+      room_10F = room_10F + 1
+    end
+    if room_id == 0x030C then
+      room_30C = room_30C + 1
+    end
+    if room_id == 0x030E then
+      room_30E = room_30E + 1
+    end
+    if room_id == 0x0106 then
+      room_106 = room_106 + 1
+    end
+    if room_id == 0x0405 then
+      room_405 = room_405 + 1
+    end
+    if room_id == 0x0205 then
+      room_205 = room_205 + 1
+    end
+    if room_id == 0x0600 then
+      room_600 = room_600 + 1
+    end
+    if room_id == 0x050F then
+      room_50F = room_50F + 1
+    end
+    if room_id == 0x0610 then
+      room_610 = room_610 + 1
+    end
+    if room_id == 0x0609 then
+      room_609 = room_609 + 1
+    end
+    if room_id == 0x0608 then
+      room_608 = room_608 + 1
+    end
+    if room_id == 0x0509 then
+      room_509 = room_509 + 1
+    end
+    if room_id == 0x0304 then
+      room_304 = room_304 + 1
+    end
+    if room_id == 0x0406 then
+      room_406 = room_406 + 1
+    end
+    print(string.format("room_106: skip %d", room_106))
+    print(string.format("room_10F: skip %d", room_10F))
+    print(string.format("room_202: skip %d", room_202))
+    print(string.format("room_205: skip %d", room_205))
+    print(string.format("room_30B: skip %d", room_30B))
+    print(string.format("room_304: skip %d", room_304))
+    print(string.format("room_30C: skip %d", room_30C))
+    print(string.format("room_30E: skip %d", room_30E))
+    print(string.format("room_405: skip %d", room_405))
+    print(string.format("room_600: skip %d", room_600))
+    print(string.format("room_608: skip %d", room_608))
+    print(string.format("room_601: skip %d", room_601))
+    print(string.format("room_50F: skip %d", room_50F))
+    print(string.format("room_60F: skip %d", room_60F))
+    print(string.format("room_609: skip %d", room_609))
+    print(string.format("room_610: skip %d", room_610))
+  end
+
+  if pending_skip then
+    print(string.format("skip normal %x", room_id))
+    writeBytes(system_addr, 0x06, 0x00, 0x00, 0x00, 0x00)
+    writeBytes(flag_addr, 0x00)
+    pending_skip = false
+    if room_id == 0x030C and room_30C == 0 then
+      saved_x = 64701
+      saved_y = 8602
+      saved_o = 3112
+    end
+    if room_id == 0x0609 and room_609 == 0 then
+      saved_x = 65090
+      saved_y = 64751
+      saved_o = 130
+    end
+    if room_id == 0x0205 and room_205 == 1 then
+      saved_o = 1936
+    end
+    pending_restore = true
+    capture_frame = 0
+  end
+
+  if special_skip_allow then
+    print(string.format("skip especial %x", room_id))
+    writeBytes(system_addr, 0x06, 0x00, 0x00, 0x00, 0x00)
+    special_skip_allow = false
+    if room_id == 0x0600 then
+      saved_x = 58055
+      saved_y = 8125
+    end
+    if room_id == 0x0304 then
+      saved_x = 5493
+      saved_y = 11198
+    end
+    if room_id == 0x0307 then
+      saved_x = 1204
+      saved_y = 62598
+      saved_o = 1000
+    end
+    if room_id == 0x030E then
+      saved_x = 64867
+      saved_y = 56048
+      saved_o = 32
+    end
+    if room_id == 0x0409 then
+      saved_x = 63790
+      saved_y = 61289
+      saved_o = 1146
+    end
+    if room_id == 0x060F and room_60F == 1 then
+      saved_x = 64701
+      saved_y = 8602
+      saved_o = 3112
+    end
+    pending_restore = true
+    capture_frame = 0
+  end
+
+  if pending_restore then
+    local door_val = readInteger(door_anim_addr)
+    if room_id == 0x0301 then
+      saved_o = 3170
+      writeSmallInteger(coord_o_addr, saved_o)
+    end
+    if sys == 3 and door_val == 0 then
+      if room_id ~= 0x050B then
+        print(string.format("restoring position: x=%d, y=%d, o=%d", saved_x, saved_y, saved_o))
+        writeSmallInteger(coord_x_addr, saved_x)
+        writeSmallInteger(coord_y_addr, saved_y)
+        if room_id ~= 0x0109 then
+          writeSmallInteger(coord_o_addr, saved_o)
+        end
+      end
+      capture_frame = capture_frame + 1
+      if capture_frame &gt;= 5 then
+        writeBytes(anim_addr, 0x00, 0x00)
+        writeBytes(entity_flag_addr, 0x03)
+        pending_restore = false
+        saved_x = 0
+        saved_y = 0
+        saved_o = 0
+      end
+    end
+  end
+end
+
+t = createTimer(nil, false)
+t.Interval = 50
+t.OnTimer = skip_cutscene
+t.Enabled = true
