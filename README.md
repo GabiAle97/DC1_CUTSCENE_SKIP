@@ -3,10 +3,12 @@
 #### (Elija su idioma abajo / Choose your language below)
 [![Español](https://img.shields.io/badge/Language-Español-red)](README.md)
 [![English](https://img.shields.io/badge/Language-English-blue)](README.en.md)
+[![Código Fuente](https://shields.io/badge/Código-Fuente-green)](script.lua)
+[![Seguridad](https://shields.io/badge/Análisis-seguridad-yellow)](https://virustotal.com)
 
 ## SOBRE EL SCRIPT
 
-LUA Script de Cheat engine que detecta cutscenes y las skippea. Principalmente se basa en skips completos, y en la menor cantidad de escenas aceleradas posibles (como animaciones de escalera, puertas, movimiento de puzzles, escenas imposibles de saltear, etc). Actualmente, es posible terminar tanto la ruta Any% como la ruta Best Ending en +- 30 minutos. 
+LUA Script de Cheat Engine que detecta cutscenes y las skippea. Principalmente se basa en skips completos, y en la menor cantidad de escenas aceleradas posibles (como animaciones de escalera, puertas, movimiento de puzzles, escenas imposibles de saltear, etc). Actualmente, es posible terminar tanto la ruta Any% como la ruta Best Ending en +- 30 minutos. 
 
 ## NOTA IMPORTANTE
 
@@ -14,11 +16,24 @@ Este script recolecta el número de veces que que se skipean escenas durante una
 
 ## CÓMO USAR
 
-Cargar el juego en Cheat Engine, y luego cargar el archivo DINO.CT para asociar el LUA con el juego. Al aceptar la ejecución del script, ya estará activado el cutscene skip.
+Dispones de dos métodos totalmente seguros para utilizar este mod según tus preferencias:
 
-Si no se desea usar Cheat Engine, existe la opción de usar el EXE dentro de este repositorio.
-Este EXE es detectado por los antivirus como un "malware" por el manejo de direcciones de memoria, pero como son solamente propias del juego, no representan un peligro para el usuario, siendo un "falso positivo" para los antivirus. Esto puede ser corroborado en el código mismo presente en este repositorio.
-Para utilizarlo, es necesario agregar dicho EXE a las excepciones del antivirus, o desactivarlo totalmente (no recomendado).
+### Opción 1: Tabla Tradicional (Recomendado para máxima transparencia)
+1. Cargar el juego de forma habitual.
+2. Abrir **Cheat Engine** y cargar el archivo `DINO.CT` incluido en este repositorio.
+3. Aceptar la ejecución del script para asociar el LUA con el juego.
+
+*Nota: Para cumplir con los estándares de la comunidad y facilitar la indexación, el código fuente completo e independiente de este sistema lógico está expuesto en texto plano en el archivo [`script.lua`](script.lua) para auditoría pública.*
+
+### Opción 2: Versión Autónoma (Sin Cheat Engine de fondo)
+Si no querés abrir Cheat Engine en cada partida, podés utilizar directamente el ejecutable independiente **`dinoskip.EXE`**.
+
+⚠️ **AVISO SOBRE FALSOS POSITIVOS:** Al haber sido generado mediante el compilador nativo de scripts de Cheat Engine, este ejecutable empaqueta internamente partes de dicha herramienta para automatizar los ganchos de memoria. Debido a esto, algunos motores de antivirus heurísticos lo marcarán erróneamente como una amenaza potencial (`HackTool` o `Generic.Trj`). 
+* El comportamiento es 100% seguro y actúa únicamente sobre las direcciones de memoria propias de *Dino Crisis*.
+* Podés comprobar la legitimidad del archivo revisando el [Análisis Público de VirusTotal](https://virustotal.com).
+* Para utilizarlo, es necesario agregar el `.exe` a las excepciones de tu antivirus.
+
+---
 
 Combinar con [DinoReady Patch DoorSkip](https://www.speedrun.com/dino1/resources/kzgcz) para una experiencia muchísimo más fluida.
 
