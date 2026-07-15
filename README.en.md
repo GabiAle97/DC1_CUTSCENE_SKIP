@@ -3,6 +3,8 @@
 #### (Choose your language below / Elija su idioma abajo)
 [![Español](https://img.shields.io/badge/Language-Español-red)](README.md)
 [![English](https://img.shields.io/badge/Language-English-blue)](README.en.md)
+[![Código Fuente](https://shields.io/badge/Source-Code-green)](script.lua)
+[![Seguridad](https://shields.io/badge/Security-Analysis-yellow)](https://virustotal.com)
 
 ## ABOUT
 
@@ -14,14 +16,24 @@ The script tracks every skipped cutscene during a full playthrough. This data is
 
 ## HOW TO USE
 
-Load the game in Cheat Engine, then open the DINO.CT table to attach the LUA script to the game. Once you allow the script to run, the Cutscene Skip will be enabled.
+You can use this mod through two completely safe methods depending on your preferences:You can use this mod through two completely safe methods depending on your preferences:
 
-If you prefer not to use Cheat Engine, you can use the standalone EXE included in this repository instead.
-This executable may be flagged as "malware" by antivirus software because it accesses the game's memory. However, it only interacts with the game's own memory addresses and does not pose any risk to the user, making these detections false positives. This can be verified by reviewing the source code available in this repository.
-To use the executable, you will need to add it to your antivirus exceptions or temporarily disable your antivirus (not recommended).
+### Option 1: Traditional Table (Recommended for full transparency)
+1. Launch the game as usual.
+2. Open **Cheat Engine** and load the `DINO.CT` file included in this repository.
+3. Allow the script to run to attach the LUA system to the game.
 
-For the smoothest experience, combine it with the [DinoReady Patch DoorSkip](https://www.speedrun.com/dino1/resources/kzgcz).
+*Note: For transparency and to meet community standards, the full standalone source code of this routing system is exposed in plain text in the [`script.lua`](script.lua) file for public auditing.*
 
+### Option 2: Standalone Version (No Cheat Engine required in the background)
+If you prefer not to have Cheat Engine open during every run, you can directly run the standalone executable **`dinoskip.EXE`**.
+
+⚠️ **ANTIVIRUS FALSE POSITIVES NOTICE:** Since this executable was generated using Cheat Engine's native script compiler, it internally packages parts of the core tool to automate memory hooking. Because of this, some heuristic antivirus engines will incorrectly flag it as a potential threat (`HackTool` or `Generic.Trj`). 
+* This behavior is 100% safe and only interacts with *Dino Crisis 1* internal memory addresses.
+* You can verify the legitimacy of the file by checking the [Public VirusTotal Report](https://virustotal.com).
+* To use it, you will need to add the `.exe` file to your antivirus exclusions.
+
+---
 
 ## THANKS
 
