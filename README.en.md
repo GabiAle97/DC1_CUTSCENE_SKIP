@@ -1,8 +1,8 @@
 # Dino Crisis Early Cutscene Skip mod
 
 #### (Choose your language below / Elija su idioma abajo)
-[![Español](https://img.shields.io/badge/Language-English-blue)](README.md)
-[![English](https://img.shields.io/badge/Language-Español-red)](README.en.md)
+[![Español](https://img.shields.io/badge/Language-Español-red)](README.md)
+[![English](https://img.shields.io/badge/Language-English-blue)](README.en.md)
 
 ## ABOUT
 
